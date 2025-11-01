@@ -1,0 +1,331 @@
+/**
+ * ============================================================================
+ * Filename       : widget-style.css
+ * Author         : Bruno DELNOZ
+ * Email          : bruno.delnoz@protonmail.com
+ * Version        : 3.0.0
+ * Date           : 2025-11-01
+ * 
+ * Description    : Styles for Whisper STT floating widget
+ * ============================================================================
+ */
+
+/* ============================================================================
+   MAIN WIDGET CONTAINER
+   ============================================================================ */
+
+#whisper-stt-widget {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 260px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 999999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: white;
+    opacity: 0.95;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: default;
+}
+
+#whisper-stt-widget:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+#whisper-stt-widget.minimized {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#whisper-stt-widget.minimized .whisper-widget-header {
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+#whisper-stt-widget.minimized .whisper-widget-title {
+    font-size: 32px;
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.whisper-widget-header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 15px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+    user-select: none;
+}
+
+.whisper-widget-header:active {
+    cursor: grabbing;
+}
+
+.whisper-widget-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.whisper-widget-minimize {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    transition: background 0.2s ease;
+}
+
+.whisper-widget-minimize:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================================
+   CONTENT
+   ============================================================================ */
+
+.whisper-widget-content {
+    padding: 15px;
+}
+
+/* ============================================================================
+   SERVER STATUS
+   ============================================================================ */
+
+.whisper-server-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.status-indicator {
+    font-size: 14px;
+    animation: pulse-status 2s ease-in-out infinite;
+}
+
+@keyframes pulse-status {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.status-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+/* ============================================================================
+   SELECTORS (Model, Language, Delay)
+   ============================================================================ */
+
+.whisper-model-selector,
+.whisper-language-selector,
+.whisper-delay-selector {
+    margin-bottom: 12px;
+}
+
+.whisper-model-selector label,
+.whisper-language-selector label,
+.whisper-delay-selector label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.model-select,
+.language-select,
+.delay-select {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.model-select:hover,
+.language-select:hover,
+.delay-select:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.model-select:focus,
+.language-select:focus,
+.delay-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================================
+   RECORDING INFO
+   ============================================================================ */
+
+.whisper-recording-info {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.recording-pulse {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    animation: pulse-recording 1s ease-in-out infinite;
+}
+
+@keyframes pulse-recording {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.recording-countdown {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* ============================================================================
+   BUTTONS (START / STOP)
+   ============================================================================ */
+
+.whisper-start-btn,
+.whisper-stop-btn {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.whisper-start-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.whisper-start-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.whisper-start-btn:active {
+    transform: translateY(0);
+}
+
+.whisper-start-btn:disabled {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.whisper-stop-btn {
+    background: #f44336;
+    color: white;
+}
+
+.whisper-stop-btn:hover {
+    background: #da190b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+
+.whisper-stop-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================================================
+   RESPONSIVE & MOBILE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    #whisper-stt-widget {
+        width: 220px;
+        right: 10px;
+        bottom: 10px;
+    }
+    
+    .whisper-widget-content {
+        padding: 12px;
+    }
+    
+    .whisper-start-btn,
+    .whisper-stop-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 0.95;
+        transform: translateY(0);
+    }
+}
+
+#whisper-stt-widget {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+.whisper-start-btn:focus,
+.whisper-stop-btn:focus,
+.whisper-widget-minimize:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    #whisper-stt-widget {
+        border: 2px solid white;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

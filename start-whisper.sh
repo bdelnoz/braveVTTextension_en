@@ -6,11 +6,15 @@
 # Email             : bruno.delnoz@protonmail.com
 # Full path         : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension/start-whisper.sh
 # Target usage      : Starting whisper.cpp server for STT extension
-# Version           : 2.3.0
-# Date              : 2025-10-31
+# Version           : 3.0.0
+# Date              : 2025-11-01
 #
 # CHANGELOG:
 # ----------
+# v3.0.0 - 2025-11-01
+#   - Version bump for v3.0.0 release (floating widget)
+#   - No functional changes
+# 
 # v2.3.0 - 2025-10-31
 #   - Full English translation of script
 #   - Updated all help messages and output
@@ -72,8 +76,8 @@ NC='\033[0m'
 show_help() {
     cat << EOF
 ${CYAN}╔══════════════════════════════════════════════════════════════════════════╗
-║              Whisper Server Launcher v2.3.0                              ║
-║                   Bruno DELNOZ - 2025-10-31                              ║
+║              Whisper Server Launcher v3.0.0                              ║
+║                   Bruno DELNOZ - 2025-11-01                              ║
 ╚══════════════════════════════════════════════════════════════════════════╝${NC}
 
 ${GREEN}DESCRIPTION:${NC}
@@ -144,8 +148,12 @@ EOF
 show_changelog() {
     cat << EOF
 ${CYAN}╔══════════════════════════════════════════════════════════════════════════╗
-║                            CHANGELOG v2.3.0                              ║
+║                            CHANGELOG v3.0.0                              ║
 ╚══════════════════════════════════════════════════════════════════════════╝${NC}
+
+${GREEN}Version 3.0.0 - 2025-11-01${NC}
+    ${YELLOW}[*]${NC} Version bump for v3.0.0 release (floating widget)
+    ${YELLOW}[*]${NC} No functional changes
 
 ${GREEN}Version 2.3.0 - 2025-10-31${NC}
     ${YELLOW}[*]${NC} Full English translation of script
