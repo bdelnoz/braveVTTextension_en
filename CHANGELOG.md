@@ -3,16 +3,132 @@
 Filename       : CHANGELOG.md
 Author         : Bruno DELNOZ
 Email          : bruno.delnoz@protonmail.com
-Full path      : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension/CHANGELOG.md
-Target usage   : Complete version history for Whisper Local STT extension
-Version        : 2.1.0
-Date           : 2025-10-31
+Version        : 3.0.0
+Date           : 2025-11-01
 ============================================================================
 -->
 
 # 📋 Changelog - Whisper Local STT for Brave
 
 Complete history of all extension versions.
+
+---
+
+## Version 3.0.0 - 2025-11-01
+
+### 🎯 MAJOR RELEASE - Floating Widget Architecture
+
+This is a **complete architectural redesign** of the extension, moving from popup-based to floating widget with Native Messaging integration.
+
+#### 🆕 New Features
+
+##### Floating Widget System
+- **Always-visible widget** on all web pages
+- **Never closes** when clicking elsewhere (no more frustration!)
+- **Draggable interface** - position it anywhere you want
+- **Minimizable** to small 🎤 icon (70x70px)
+- **Position memory** - widget reopens where you left it (per domain)
+- **Semi-transparent** when not active (opacity 0.95)
+- **Smooth animations** - fade in, hover effects, pulse during recording
+
+##### Dynamic Model Selection 🤖
+- **Real-time model detection** - see which model is currently running
+- **Model dropdown** with all available models (tiny, base, small, medium, large-v3)
+- **One-click model switching** - no need to touch terminal!
+- **Automatic server restart** with selected model
+- **Visual feedback** during model switch (🟡 Restarting...)
+- **Models auto-detected** from whisper.cpp/models directory
+
+##### Server Status Monitoring 🟢
+- **Real-time connection check** every 3 seconds
+- **Visual status indicator**:
+  - 🟢 Connected (model-name) - Ready to use
+  - 🔴 Disconnected - Server not running
+  - 🟡 Restarting... - Model switch in progress
+- **START button disabled** when disconnected (prevents errors)
+
+##### Native Messaging Host
+- **whisper-control.sh** - Bash script for server control
+- **List models** action - returns all available models
+- **Switch model** action - kills and restarts server with new model
+- **Get status** action - checks server health
+- **JSON protocol** via stdin/stdout
+- **Error handling** and timeout management (15s max)
+- **Logging** to /tmp/whisper-control.log
+
+##### Improved Configuration
+- **Language selector** - 9 languages available in widget
+- **Delay selector** - 5s, 10s, 15s, 20s, 30s options
+- **All preferences saved** to localStorage
+- **Preferences per domain** (position, minimized state)
+- **Global preferences** (language, delay)
+
+#### 🔧 Technical Changes
+
+##### Architecture
+- **Removed popup.html/popup.js** - No longer needed
+- **Added content-widget.js** (new main component, 600+ lines)
+- **Added widget-style.css** (complete styling, 300+ lines)
+- **Added background.js** - Service worker for Native Messaging relay
+- **Modified manifest.json** - Added nativeMessaging permission, removed popup
+
+##### Files Added
+- `content-widget.js` - Floating widget implementation
+- `widget-style.css` - Widget styles
+- `background.js` - Service worker
+- `whisper-control.sh` - Native Messaging Host
+- `com.whisper.control.json` - Native Host manifest
+- `install-native-host.sh` - Automated Native Host installer
+
+##### Files Modified
+- `manifest.json` - v3.0.0 with Native Messaging
+- `install.sh` - v3.0.0 with Native Host support
+- `start-whisper.sh` - v3.0.0 (version bump only)
+- `README.md` - v3.0.0 complete rewrite
+- `INSTALL.md` - v3.0.0 with Native Host guide
+- `CHANGELOG.md` - v3.0.0 this file
+
+##### Files Removed
+- ❌ `popup.html` - Replaced by floating widget
+- ❌ `popup.js` - Replaced by content-widget.js
+
+##### Code Statistics
+- **New lines**: ~1500
+- **Total files**: 14
+- **Languages**: JavaScript, CSS, Bash, JSON, Markdown
+
+#### 📚 Documentation
+- **Complete README rewrite** for v3.0.0
+- **New INSTALL guide** with Native Host installation
+- **Updated CHANGELOG** with detailed v3.0.0 info
+- **All files versioned** to v3.0.0
+
+#### 🐛 Bug Fixes
+- Fixed ENTER simulation issues from v2.x
+- Fixed audio context cleanup on stop
+- Fixed widget z-index conflicts
+- Fixed position saving edge cases
+
+#### ⚡ Performance
+- Widget renders once per page (not on every popup open)
+- Efficient status checking (3s intervals, not continuous)
+- Optimized drag & drop (requestAnimationFrame)
+- Lazy loading of models list
+
+#### 🔒 Security
+- Native Host restricted to extension ID
+- No eval() or unsafe-inline
+- Manifest V3 compliance
+- CSP-friendly code
+
+#### 🎨 UI/UX Improvements
+- **Modern gradient design** (same as v2.x popup)
+- **Smooth transitions** and hover effects
+- **Clear visual feedback** for all actions
+- **Accessibility support** (keyboard navigation, ARIA labels)
+- **Responsive design** (works on all screen sizes)
+- **High contrast mode** support
+- **Reduced motion** support for accessibility
 
 ---
 
@@ -182,26 +298,34 @@ Complete history of all extension versions.
 - Auditable open source code
 - Manifest V3 with minimal permissions
 
+**Audio data is never**:
+- Sent to the internet
+- Stored on a server
+- Shared with third parties
+- Used for AI training
+
 ---
 
 ## 🔮 Future Roadmap
 
-### Features planned for v3.0.0
+### Planned for v3.1.0
 - [ ] **Global keyboard shortcuts** (e.g., Ctrl+Shift+M to start/stop)
-- [ ] **Continuous dictation mode** without time limit
-- [ ] **Transcription history** with search
-- [ ] **Export transcriptions** in TXT, JSON, CSV
-- [ ] **Multi-microphones** with selection in interface
-- [ ] **Advanced settings** directly in popup
-- [ ] **Customizable themes** (light/dark mode)
-- [ ] **Usage statistics** (number of transcriptions, total time, etc.)
+- [ ] **Multiple microphone selection** in widget
+- [ ] **Custom themes** for widget (light/dark mode)
+- [ ] **Recording history** with playback
 
-### Planned Technical Improvements
-- [ ] **Background service worker** for better resource management
-- [ ] **Model caching** for faster startup
-- [ ] **WebGPU support** for hardware acceleration
-- [ ] **Audio compression** before sending to server
-- [ ] **Offline mode** with temporary local storage
+### Planned for v3.2.0
+- [ ] **Continuous dictation mode** without time limit
+- [ ] **Export transcriptions** in TXT, JSON, CSV
+- [ ] **Usage statistics** (transcription count, total time, accuracy)
+- [ ] **Multiple concurrent recordings** (different tabs)
+
+### Planned for v4.0.0
+- [ ] **WebGPU support** for faster transcription
+- [ ] **Multi-language in same recording** (auto-detect switches)
+- [ ] **Real-time transcription** (streaming mode)
+- [ ] **Voice commands** for browser control
+- [ ] **Integration with more AI assistants**
 
 ### Additional Languages
 - [ ] Support for all 99 Whisper languages
@@ -212,11 +336,12 @@ Complete history of all extension versions.
 
 ## 📊 Version Statistics
 
-| Version | Date | Lines of Code | Files | New Features |
-|---------|------|---------------|-------|--------------|
-| 1.0.0 | 2025-10-31 | ~800 | 7 | 5 |
-| 2.0.0 | 2025-10-31 | ~1200 | 9 | +2 |
-| 2.1.0 | 2025-10-31 | ~1200 | 9 | 0 (translation) |
+| Version | Date | Files | Lines of Code | New Features | Breaking Changes |
+|---------|------|-------|---------------|--------------|------------------|
+| 1.0.0 | 2025-10-31 | 7 | ~800 | 5 | - |
+| 2.0.0 | 2025-10-31 | 9 | ~1200 | +2 | No |
+| 2.1.0 | 2025-10-31 | 9 | ~1200 | 0 (translation) | No |
+| **3.0.0** | **2025-11-01** | **14** | **~2700** | **+8** | **Yes (architecture)** |
 
 ---
 
@@ -230,8 +355,28 @@ All contributions are welcome! To contribute:
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+**Coding standards**:
+- Follow existing code style
+- Add comments for complex logic
+- Update documentation (README, INSTALL, CHANGELOG)
+- Test thoroughly before PR
+- Version all modified files
+
+---
+
+## 📄 License
+
+[To be defined - MIT, GPL, Apache, etc.]
+
 ---
 
 **Author**: Bruno DELNOZ - bruno.delnoz@protonmail.com  
 **Project**: Whisper Local STT - Brave Extension  
-**Last update**: 2025-10-31
+**Current Version**: 3.0.0  
+**Last Update**: 2025-11-01
+
+---
+
+**Thank you for using Whisper Local STT!** 🎤✨
+
+For questions, issues, or suggestions, please open an issue on GitHub.

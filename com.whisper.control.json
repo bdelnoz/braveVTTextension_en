@@ -1,0 +1,9 @@
+{
+  "name": "com.whisper.control",
+  "description": "Native Messaging Host for Whisper STT Extension - Model switching and server control",
+  "path": "/ABSOLUTE/PATH/TO/whisper-control.sh",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://YOUR_EXTENSION_ID_HERE/"
+  ]
+}
