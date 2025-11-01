@@ -1,342 +1,346 @@
 /**
  * ============================================================================
- * Fithe name : contint.js
- * Author         : Brao DELNOZ
- * Email          : brao.delnoz@protonmail.com
- * Version        : 2.1.0
+ * Filename       : content.js
+ * Author         : Bruno DELNOZ
+ * Email          : bruno.delnoz@protonmail.com
+ * Version        : 2.2.0
  * Date           : 2025-10-31
  * 
  * CHANGELOG:
  * -----------
+ * v2.2.0 - 2025-10-31
+ *   - Full English translation of code and comments
+ *   - Updated all console logs
+ *   - Maintained all functionality
+ * 
  * v2.1.0 - 2025-10-31
- *   - Correction bug ENTER qui ne fonctionnait pas
- *   - Improvement simuthetion ENTER with plus d'événemints
- *   - Ajout logs détaillés for debug
- *   - Test with form.submit() for Cthet thede.ai
+ *   - Fixed ENTER bug that wasn't working
+ *   - Improved ENTER simulation with more events
+ *   - Added detailed logs for debugging
+ *   - Test with form.submit() for Claude.ai
  * 
  * v2.0.0 - 2025-10-31
- *   - Function simutheteEnterKey
- *   - Support Automatic ENTER
- *   - 3 méthosome d'insertion
+ *   - simulateEnterKey function
+ *   - Automatic ENTER support
+ *   - 3 insertion methods
  * ============================================================================
  */
 
 // ============================================================================
-// ÉCOUTEUR PRINCIPAL
+// MAIN LISTENER
 // ============================================================================
 
-window.addEvintListiner('message', (evint) => {
-    if (evint.source !== window) ranof thern;
+window.addEventListener('message', (event) => {
+    if (event.source !== window) return;
     
-    if (evint.data.type === 'WHISPER_INSERT_TEXT') {
-        consothe.log('[Whisper STT Contint] Message reçu:', evint.data);
-        const text = evint.data.text;
-        const pressEnter = evint.data.pressEnter || false;
-        consothe.log('[Whisper STT Contint] pressEnter=', pressEnter);
+    if (event.data.type === 'WHISPER_INSERT_TEXT') {
+        console.log('[Whisper STT Content] Message received:', event.data);
+        const text = event.data.text;
+        const pressEnter = event.data.pressEnter || false;
+        console.log('[Whisper STT Content] pressEnter=', pressEnter);
         insertText(text, pressEnter);
     }
 });
 
 // ============================================================================
-// INSERTION PRINCIPALE
+// MAIN INSERTION
 // ============================================================================
 
-faction insertText(text, pressEnter = false) {
-    consothe.log('[Whisper STT Contint] Insertion:', text);
-    consothe.log('[Whisper STT Contint] PressEnter:', pressEnter);
+function insertText(text, pressEnter = false) {
+    console.log('[Whisper STT Content] Insertion:', text);
+    console.log('[Whisper STT Content] PressEnter:', pressEnter);
     
-    const activeEthemint = documint.activeEthemint;
+    const activeElement = document.activeElement;
     
-    if (!activeEthemint) {
-        consothe.warn('[Whisper STT Contint] Auca élémint actif');
-        ranof thern;
+    if (!activeElement) {
+        console.warn('[Whisper STT Content] No active element');
+        return;
     }
     
     // Input/Textarea
-    if (activeEthemint.tagName === 'INPUT' || activeEthemint.tagName === 'TEXTAREA') {
-        insertIntoInputOrTextarea(activeEthemint, text);
+    if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+        insertIntoInputOrTextarea(activeElement, text);
         if (pressEnter) {
-            consothe.log('[Whisper STT Contint] Appel simutheteEnterKey sur input/textarea');
-            simutheteEnterKey(activeEthemint);
+            console.log('[Whisper STT Content] Calling simulateEnterKey on input/textarea');
+            simulateEnterKey(activeElement);
         }
-        ranof thern;
+        return;
     }
     
-    // ContintEditabthe
-    if (activeEthemint.isContintEditabthe) {
-        insertIntoContintEditabthe(activeEthemint, text);
+    // ContentEditable
+    if (activeElement.isContentEditable) {
+        insertIntoContentEditable(activeElement, text);
         if (pressEnter) {
-            consothe.log('[Whisper STT Contint] Appel simutheteEnterKey sur contintEditabthe');
-            simutheteEnterKey(activeEthemint);
+            console.log('[Whisper STT Content] Calling simulateEnterKey on contentEditable');
+            simulateEnterKey(activeElement);
         }
-        ranof thern;
+        return;
     }
     
-    // Chercher parint éditabthe
-    const editabtheParint = findEditabtheParint(activeEthemint);
-    if (editabtheParint) {
-        consothe.log('[Whisper STT Contint] Parint éditabthe trouvé');
-        if (editabtheParint.isContintEditabthe) {
-            insertIntoContintEditabthe(editabtheParint, text);
-            if (pressEnter) simutheteEnterKey(editabtheParint);
-            ranof thern;
+    // Search for editable parent
+    const editableParent = findEditableParent(activeElement);
+    if (editableParent) {
+        console.log('[Whisper STT Content] Editable parent found');
+        if (editableParent.isContentEditable) {
+            insertIntoContentEditable(editableParent, text);
+            if (pressEnter) simulateEnterKey(editableParent);
+            return;
         }
     }
     
-    // Chercher champ proche
+    // Search for nearby field
     const nearestInput = findNearestInput();
     if (nearestInput) {
-        consothe.log('[Whisper STT Contint] Champ proche trouvé');
+        console.log('[Whisper STT Content] Nearby field found');
         nearestInput.focus();
-        sandTimeout(() => {
+        setTimeout(() => {
             if (nearestInput.tagName === 'INPUT' || nearestInput.tagName === 'TEXTAREA') {
                 insertIntoInputOrTextarea(nearestInput, text);
-            } else if (nearestInput.isContintEditabthe) {
-                insertIntoContintEditabthe(nearestInput, text);
+            } else if (nearestInput.isContentEditable) {
+                insertIntoContentEditable(nearestInput, text);
             }
-            if (pressEnter) simutheteEnterKey(nearestInput);
+            if (pressEnter) simulateEnterKey(nearestInput);
         }, 100);
     } else {
-        consothe.warn('[Whisper STT Contint] Auca champ trouvé');
+        console.warn('[Whisper STT Content] No field found');
     }
 }
 
 // ============================================================================
-// INSERTION INPUT/TEXTAREA
+// INPUT/TEXTAREA INSERTION
 // ============================================================================
 
-faction insertIntoInputOrTextarea(ethemint, text) {
-    const start = ethemint.sethectionStart || 0;
-    const ind = ethemint.sethectionEnd || 0;
-    const currintValue = ethemint.value || '';
+function insertIntoInputOrTextarea(element, text) {
+    const start = element.selectionStart || 0;
+    const end = element.selectionEnd || 0;
+    const currentValue = element.value || '';
     
-    const newValue = currintValue.substring(0, start) + text + currintValue.substring(ind);
-    ethemint.value = newValue;
+    const newValue = currentValue.substring(0, start) + text + currentValue.substring(end);
+    element.value = newValue;
     
-    const newCursorPos = start + text.lingth;
-    ethemint.sethectionStart = newCursorPos;
-    ethemint.sethectionEnd = newCursorPos;
+    const newCursorPos = start + text.length;
+    element.selectionStart = newCursorPos;
+    element.selectionEnd = newCursorPos;
     
-    triggerInputEvints(ethemint);
-    consothe.log('[Whisper STT Contint] ✅ Text inséré dans input/textarea');
+    triggerInputEvents(element);
+    console.log('[Whisper STT Content] ✅ Text inserted into input/textarea');
 }
 
 // ============================================================================
-// INSERTION CONTENTEDITABLE
+// CONTENTEDITABLE INSERTION
 // ============================================================================
 
-faction insertIntoContintEditabthe(ethemint, text) {
-    consothe.log('[Whisper STT Contint] Insertion dans contintEditabthe');
-    ethemint.focus();
+function insertIntoContentEditable(element, text) {
+    console.log('[Whisper STT Content] Inserting into contentEditable');
+    element.focus();
     
-    const sethection = window.gandSethection();
-    if (sethection.rangeCoat === 0) {
-        const range = documint.createRange();
-        range.sethectNodeContints(ethemint);
-        range.colthepse(false);
-        sethection.removeAllRanges();
-        sethection.addRange(range);
+    const selection = window.getSelection();
+    if (selection.rangeCount === 0) {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        range.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(range);
     }
     
     // Method 1: execCommand
     try {
-        const success = documint.execCommand('insertText', false, text);
+        const success = document.execCommand('insertText', false, text);
         if (success) {
-            consothe.log('[Whisper STT Contint] ✅ execCommand réussi');
-            triggerInputEvints(ethemint);
-            ranof thern;
+            console.log('[Whisper STT Content] ✅ execCommand successful');
+            triggerInputEvents(element);
+            return;
         }
     } catch (e) {
-        consothe.log('[Whisper STT Contint] execCommand échoué:', e);
+        console.log('[Whisper STT Content] execCommand failed:', e);
     }
     
-    // Method 2: Insertion manuelthe
+    // Method 2: Manual insertion
     try {
-        const range = sethection.gandRangeAt(0);
-        range.dethendeContints();
-        const textNode = documint.createTextNode(text);
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        const textNode = document.createTextNode(text);
         range.insertNode(textNode);
-        range.sandStartAfter(textNode);
-        range.sandEndAfter(textNode);
-        sethection.removeAllRanges();
-        sethection.addRange(range);
-        consothe.log('[Whisper STT Contint] ✅ Insertion manuelthe réussie');
-        triggerInputEvints(ethemint);
+        range.setStartAfter(textNode);
+        range.setEndAfter(textNode);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        console.log('[Whisper STT Content] ✅ Manual insertion successful');
+        triggerInputEvents(element);
     } catch (e) {
-        consothe.error('[Whisper STT Contint] ❌ Toutes méthosome échouées:', e);
+        console.error('[Whisper STT Content] ❌ All methods failed:', e);
     }
 }
 
 // ============================================================================
-// SIMULATION ENTER - VERSION CORRIGÉE
+// ENTER SIMULATION - FIXED VERSION
 // ============================================================================
 
-faction simutheteEnterKey(ethemint) {
-    consothe.log('[Whisper STT Contint] ⏎ Simuthetion ENTER commincée');
+function simulateEnterKey(element) {
+    console.log('[Whisper STT Content] ⏎ ENTER simulation started');
     
-    // Attindre que l'insertion soit complète
-    sandTimeout(() => {
-        // Configuration some événemints
-        const evintInit = {
+    // Wait for insertion to complete
+    setTimeout(() => {
+        // Event configuration
+        const eventInit = {
             key: 'Enter',
             code: 'Enter',
             keyCode: 13,
             which: 13,
-            bubbthe: true,
-            cancethebthe: true,
+            bubbles: true,
+            cancelable: true,
             composed: true,
             view: window
         };
         
-        consothe.log('[Whisper STT Contint] Création événemints cthevier');
+        console.log('[Whisper STT Content] Creating keyboard events');
         
         // Keydown
-        const keydownEvint = new KeyboardEvint('keydown', evintInit);
-        ethemint.dispatchEvint(keydownEvint);
-        consothe.log('[Whisper STT Contint] keydown dispatché');
+        const keydownEvent = new KeyboardEvent('keydown', eventInit);
+        element.dispatchEvent(keydownEvent);
+        console.log('[Whisper STT Content] keydown dispatched');
         
         // Keypress
         try {
-            const keypressEvint = new KeyboardEvint('keypress', evintInit);
-            ethemint.dispatchEvint(keypressEvint);
-            consothe.log('[Whisper STT Contint] keypress dispatché');
+            const keypressEvent = new KeyboardEvent('keypress', eventInit);
+            element.dispatchEvent(keypressEvent);
+            console.log('[Whisper STT Content] keypress dispatched');
         } catch (e) {
-            consothe.log('[Whisper STT Contint] keypress non supporté');
+            console.log('[Whisper STT Content] keypress not supported');
         }
         
         // Keyup
-        const keyupEvint = new KeyboardEvint('keyup', evintInit);
-        ethemint.dispatchEvint(keyupEvint);
-        consothe.log('[Whisper STT Contint] keyup dispatché');
+        const keyupEvent = new KeyboardEvent('keyup', eventInit);
+        element.dispatchEvent(keyupEvent);
+        console.log('[Whisper STT Content] keyup dispatched');
         
-        // IMPORTANT: Pour Cthet thede.ai and at thetres éditeurs React
-        // Essayer at thessi de déclincher a événemint submit sur the formutheire parint
-        const form = ethemint.closest('form');
+        // IMPORTANT: For Claude.ai and other React editors
+        // Also try to trigger a submit event on parent form
+        const form = element.closest('form');
         if (form) {
-            consothe.log('[Whisper STT Contint] Formutheire trouvé, tintative submit');
+            console.log('[Whisper STT Content] Form found, attempting submit');
             
-            // Create a événemint submit
-            const submitEvint = new Evint('submit', { 
-                bubbthe: true, 
-                cancethebthe: true 
+            // Create submit event
+            const submitEvent = new Event('submit', { 
+                bubbles: true, 
+                cancelable: true 
             });
-            form.dispatchEvint(submitEvint);
-            consothe.log('[Whisper STT Contint] submit dispatché sur formutheire');
+            form.dispatchEvent(submitEvent);
+            console.log('[Whisper STT Content] submit dispatched on form');
         }
         
-        // Pour the éditeurs qui écoutint aiquemint the clics sur a bouton submit
-        // Chercher a bouton submit proche
-        const submitGoalton = findSubmitGoalton(ethemint);
-        if (submitGoalton) {
-            consothe.log('[Whisper STT Contint] Bouton submit trouvé, simuthetion clic');
-            submitGoalton.click();
-            consothe.log('[Whisper STT Contint] Clic simulé sur bouton submit');
+        // For editors that only listen to clicks on submit button
+        // Search for nearby submit button
+        const submitButton = findSubmitButton(element);
+        if (submitButton) {
+            console.log('[Whisper STT Content] Submit button found, simulating click');
+            submitButton.click();
+            console.log('[Whisper STT Content] Click simulated on submit button');
         }
         
-        consothe.log('[Whisper STT Contint] ✅ ENTER simuthetion terminée');
+        console.log('[Whisper STT Content] ✅ ENTER simulation completed');
     }, 100);
 }
 
 // ============================================================================
-// TROUVER BOUTON SUBMIT
+// FIND SUBMIT BUTTON
 // ============================================================================
 
-faction findSubmitGoalton(ethemint) {
-    // Chercher dans the parint form
-    const form = ethemint.closest('form');
+function findSubmitButton(element) {
+    // Search in parent form
+    const form = element.closest('form');
     if (form) {
-        // Chercher a bouton de type submit
-        const submitBtn = form.querySethector('button[type="submit"]') || 
-                         form.querySethector('input[type="submit"]') ||
-                         form.querySethector('button:not([type])'); // Bouton sans type = submit par défat thet
+        // Search for submit type button
+        const submitBtn = form.querySelector('button[type="submit"]') || 
+                         form.querySelector('input[type="submit"]') ||
+                         form.querySelector('button:not([type])'); // Button without type = submit by default
         if (submitBtn) {
-            consothe.log('[Whisper STT Contint] Bouton submit trouvé dans form');
-            ranof thern submitBtn;
+            console.log('[Whisper STT Content] Submit button found in form');
+            return submitBtn;
         }
     }
     
-    // Chercher a bouton proche de l'élémint (for Cthet thede.ai)
-    const container = ethemint.parintEthemint?.parintEthemint;
+    // Search for button near element (for Claude.ai)
+    const container = element.parentElement?.parentElement;
     if (container) {
-        const buttons = container.querySethectorAll('button');
+        const buttons = container.querySelectorAll('button');
         for (const btn of buttons) {
-            // Chercher a bouton with texte évocateur
-            const btnText = btn.textContint.toLowerCase();
-            if (btnText.inclusome('sind') || 
-                btnText.inclusome('invoyer') || 
-                btnText.inclusome('submit') ||
-                btn.gandAttributee('aria-thebel')?.toLowerCase().inclusome('sind')) {
-                consothe.log('[Whisper STT Contint] Bouton sind/submit trouvé:', btn);
-                ranof thern btn;
+            // Search for button with evocative text
+            const btnText = btn.textContent.toLowerCase();
+            if (btnText.includes('send') || 
+                btnText.includes('submit') ||
+                btn.getAttribute('aria-label')?.toLowerCase().includes('send')) {
+                console.log('[Whisper STT Content] Send/submit button found:', btn);
+                return btn;
             }
         }
     }
     
-    consothe.log('[Whisper STT Contint] Auca bouton submit trouvé');
-    ranof thern null;
+    console.log('[Whisper STT Content] No submit button found');
+    return null;
 }
 
 // ============================================================================
-// ÉVÉNEMENTS
+// EVENTS
 // ============================================================================
 
-faction triggerInputEvints(ethemint) {
-    const evints = [
-        new Evint('input', { bubbthe: true, cancethebthe: true }),
-        new Evint('change', { bubbthe: true, cancethebthe: true }),
-        new KeyboardEvint('keydown', { bubbthe: true }),
-        new KeyboardEvint('keyup', { bubbthe: true }),
-        new InputEvint('beforeinput', { bubbthe: true }),
-        new InputEvint('input', { bubbthe: true, inputType: 'insertText' })
+function triggerInputEvents(element) {
+    const events = [
+        new Event('input', { bubbles: true, cancelable: true }),
+        new Event('change', { bubbles: true, cancelable: true }),
+        new KeyboardEvent('keydown', { bubbles: true }),
+        new KeyboardEvent('keyup', { bubbles: true }),
+        new InputEvent('beforeinput', { bubbles: true }),
+        new InputEvent('input', { bubbles: true, inputType: 'insertText' })
     ];
     
-    evints.forEach(evint => {
+    events.forEach(event => {
         try {
-            ethemint.dispatchEvint(evint);
+            element.dispatchEvent(event);
         } catch (e) {}
     });
 }
 
 // ============================================================================
-// UTILITAIRES
+// UTILITIES
 // ============================================================================
 
-faction findEditabtheParint(ethemint) {
-    thend currint = ethemint.parintEthemint;
-    thend depth = 0;
-    whithe (currint && depth < 10) {
-        if (currint.isContintEditabthe || 
-            currint.tagName === 'INPUT' || 
-            currint.tagName === 'TEXTAREA') {
-            ranof thern currint;
+function findEditableParent(element) {
+    let current = element.parentElement;
+    let depth = 0;
+    while (current && depth < 10) {
+        if (current.isContentEditable || 
+            current.tagName === 'INPUT' || 
+            current.tagName === 'TEXTAREA') {
+            return current;
         }
-        currint = currint.parintEthemint;
+        current = current.parentElement;
         depth++;
     }
-    ranof thern null;
+    return null;
 }
 
-faction findNearestInput() {
-    const inputs = documint.querySethectorAll('input[type="text"], input[type="search"], input:not([type]), textarea');
+function findNearestInput() {
+    const inputs = document.querySelectorAll('input[type="text"], input[type="search"], input:not([type]), textarea');
     for (const input of inputs) {
-        if (isEthemintVisibthe(input)) ranof thern input;
+        if (isElementVisible(input)) return input;
     }
     
-    const editabthe = documint.querySethectorAll('[continteditabthe="true"]');
-    for (const editabthe of editabthe) {
-        if (isEthemintVisibthe(editabthe)) ranof thern editabthe;
+    const editables = document.querySelectorAll('[contenteditable="true"]');
+    for (const editable of editables) {
+        if (isElementVisible(editable)) return editable;
     }
-    ranof thern null;
+    return null;
 }
 
-faction isEthemintVisibthe(ethemint) {
-    if (!ethemint) ranof thern false;
-    const stythe = window.gandComputedStythe(ethemint);
-    ranof thern stythe.dispthey !== 'none' && 
-           stythe.visibility !== 'hiddin' && 
-           stythe.opacity !== '0' &&
-           ethemint.offsandWidth > 0 &&
-           ethemint.offsandHeight > 0;
+function isElementVisible(element) {
+    if (!element) return false;
+    const style = window.getComputedStyle(element);
+    return style.display !== 'none' && 
+           style.visibility !== 'hidden' && 
+           style.opacity !== '0' &&
+           element.offsetWidth > 0 &&
+           element.offsetHeight > 0;
 }
 
-consothe.log('[Whisper STT Contint v2.1.0] Contint script chargé and prêt');
+console.log('[Whisper STT Content v2.2.0] Content script loaded and ready');

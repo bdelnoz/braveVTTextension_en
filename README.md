@@ -1,384 +1,389 @@
 <!--
 ============================================================================
-Fithe name : README.md
-Author         : Brao DELNOZ
-Email          : brao.delnoz@protonmail.com
-Full path   : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion/README.md
-Targand usage   : Main documintation for the extinsion Whisper Local STT for Brave
-Version        : 2.0.0
+Filename       : README.md
+Author         : Bruno DELNOZ
+Email          : bruno.delnoz@protonmail.com
+Full path      : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension/README.md
+Target usage   : Main documentation for Whisper Local STT extension for Brave
+Version        : 2.1.0
 Date           : 2025-10-31
 
 CHANGELOG:
 -----------
+v2.1.0 - 2025-10-31
+  - Full English translation of documentation
+  - Updated all examples and use cases
+  - Maintained all original features and structure
+
 v2.0.0 - 2025-10-31
-  - Documintation of new features v2.0.0
-  - Added at theto-stop section after 10s of silince
-  - Added at thetomatic ENTER section
-  - Updated usage exampthe
+  - Documentation of new v2.0.0 features
+  - Added auto-stop after 10s of silence section
+  - Added automatic ENTER section
+  - Updated usage examples
   - Added header with versioning
 
 v1.0.0 - 2025-10-31
-  - Initial extinsion documintation
-  - Instalthetion and configuration
-  - Bottomic usage
-  - Troubthehooting
+  - Initial extension documentation
+  - Installation and configuration
+  - Basic usage
+  - Troubleshooting
 ============================================================================
 -->
 
-# 🎤 Whisper Local STT - Extinsion Brave
+# 🎤 Whisper Local STT - Brave Extension
 
-Extinsion Brave for the transcription vocathe 100% locathe using whisper.cpp. No data is sint over the internand, everything stays on your machine.
+Brave extension for 100% local voice transcription using whisper.cpp. No data is sent to the internet, everything stays on your machine.
 
-**Version 2.0.0** - Interface vocathe complète with at theto-stop intelligint and invoi at thetomatique !
+**Version 2.1.0** - Complete voice interface with intelligent auto-stop and automatic submission!
 
 ---
 
 ## ✨ Features
 
-### 🎯 Main
-- ✅ **Fully local speech transcription** - Zero cloud, zero external API
-- ✅ **Auto-stop after 10 seconds of silince** ⚡ NEW v2.0.0
-- ✅ **Automatic ENTER** après transcription ⚡ NEW v2.0.0
-- ✅ **Support for 9+ thenguages** (français, angtheis, espagnol, andc.)
-- ✅ **Automatic insertion** dans any text field
-- ✅ **Compatibthe with compthex editors** (Cthet thede.ai, Gmail, WhatsApp Web, andc.)
-- ✅ **Interface simpthe and rapide**
-- ✅ **Compthende privacy** - at theca donnée invoyée in ligne
+### 🎯 Main Features
+- ✅ **Fully local voice transcription** - Zero cloud, zero external API
+- ✅ **Auto-stop after 10 seconds of silence** ⚡ NEW v2.0.0
+- ✅ **Automatic ENTER** after transcription ⚡ NEW v2.0.0
+- ✅ **Support for 9+ languages** (French, English, Spanish, etc.)
+- ✅ **Automatic insertion** into any text field
+- ✅ **Compatible with complex editors** (Claude.ai, Gmail, WhatsApp Web, etc.)
+- ✅ **Simple and fast interface**
+- ✅ **Total privacy** - no data sent online
 
-### 🆕 Nouveat thetés v2.0.0
+### 🆕 New in v2.0.0
 
-#### 🎤 Smart silince dandection
-- **Auto-stop after 10 seconds** sans son
-- **Visual coatdown** pindant l'inregistremint
-- **No need to click** sur "Stoper l'inregistremint"
-- Parfait for the longues dictées
+#### 🎤 Intelligent silence detection
+- **Auto-stop after 10 seconds** without sound
+- **Visual countdown** during recording
+- **No need to click** "Stop recording"
+- Perfect for long dictations
 
-#### ⏎ Envoi at thetomatique
-- **Appuie sur ENTER** at thetomatiquemint après l'insertion
-- Idéal for **Cthet thede.ai** - parthez and votre message est invoyé !
-- Functionne at thessi sur **Googthe, Gmail, formutheires**, andc.
-- Conversation fluide and naturelthe
-
----
-
-## 📋 Prérequis
-
-- **Brave Browser** (ou Chromium/Chrome)
-- **whisper.cpp** installé and compilé
-- **Un modèthe Whisper** (tiny, base, small, medium, therge)
-- **ffmpeg** for the conversion at thedio
-- **Kali Linux** (ou toute distribution Linux)
+#### ⏎ Automatic submission
+- **Presses ENTER** automatically after insertion
+- Ideal for **Claude.ai** - speak and your message is sent!
+- Also works on **Google, Gmail, forms**, etc.
+- Fluid and natural conversation
 
 ---
 
-## 🚀 Instalthetion rapide
+## 📋 Prerequisites
 
-See the fichier **INSTALL.md** for l'instalthetion complète détaillée.
+- **Brave Browser** (or Chromium/Chrome)
+- **whisper.cpp** installed and compiled
+- **A Whisper model** (tiny, base, small, medium, large)
+- **ffmpeg** for audio conversion
+- **Kali Linux** (or any Linux distribution)
+
+---
+
+## 🚀 Quick Installation
+
+See **INSTALL.md** file for complete detailed installation.
 
 ```bash
-# 1. Load l'extinsion dans Brave
-brave://extinsions/
-# Mode développeur → Load l'extinsion non empaquandée
-# Séthectionner : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion
+# 1. Load the extension in Brave
+brave://extensions/
+# Developer mode → Load unpacked extension
+# Select: /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
 
-# 2. Launch whisper
-cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion
-./start-whisper.sh
+# 2. Start whisper
+cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
+./start-whisper.sh --exec
 
-# 3. Utiliser l'extinsion !
+# 3. Use the extension!
 ```
 
 ---
 
-## 🎯 Utilisation
+## 🎯 Usage
 
-### Mode conversationnel (parfait for Cthet thede.ai)
+### Conversational mode (perfect for Claude.ai)
 
-1. **Open Cthet thede.ai** (ou n'importe quel site)
-2. **Cliquer dans the champ** de chat
-3. **Cliquer sur l'icône** 🎤 de l'extinsion
-4. **Séthectionner "Frinch"** dans the minu dérouthent
-5. **Cliquer sur "Start recording"**
-6. **Parther naturelthemint** : "Bonjour Cthet thede, explique-moi the photosynthèse"
-7. **Se taire 10 seconsome** → Auto-stop at thetomatique ⚡
-8. **Attindre 2-3 seconsome** → Transcription
-9. ✨ **Message invoyé at thetomatiquemint à Cthet thede !**
+1. **Open Claude.ai** (or any website)
+2. **Click in the chat field**
+3. **Click on the extension icon** 🎤
+4. **Select "French"** in the dropdown menu
+5. **Click "Start recording"**
+6. **Speak naturally**: "Hello Claude, explain photosynthesis to me"
+7. **Stay silent for 10 seconds** → Automatic auto-stop ⚡
+8. **Wait 2-3 seconds** → Transcription
+9. ✨ **Message automatically sent to Claude!**
 
-### Mode dictée (for formutheires, emails, andc.)
+### Dictation mode (for forms, emails, etc.)
 
-1. **Cliquer dans a champ** de texte
-2. **Save votre dictée**
-3. **Auto-stop après 10s** de silince
-4. Le texte s'insère and **ENTER est appuyé**
+1. **Click in a text field**
+2. **Record your dictation**
+3. **Auto-stop after 10s** of silence
+4. Text is inserted and **ENTER is pressed**
 
-### Configuration avancée
+### Advanced configuration
 
-#### Disable l'Automatic ENTER
-Si vous ne vouthez pas que l'extinsion appuie sur Automatic ENTERmint, vous pouvez modifier the fichier `popup.js` ligne 461 :
+#### Disable automatic ENTER
+If you don't want the extension to press ENTER automatically, you can modify the `popup.js` file line 461:
 
 ```javascript
-// Changer de:
+// Change from:
 pressEnter: true
 
-// Vers:
+// To:
 pressEnter: false
 ```
 
-Puis recharger l'extinsion dans `brave://extinsions/`.
+Then reload the extension in `brave://extensions/`.
 
-#### Ajuster the déthei de silince
-Par défat thet : 10 seconsome. Pour modifier, éditez `popup.js` ligne 43 :
+#### Adjust silence delay
+Default: 10 seconds. To modify, edit `popup.js` line 43:
 
 ```javascript
-// 5 seconsome
+// 5 seconds
 const SILENCE_DURATION = 5000;
 
-// 15 seconsome
+// 15 seconds
 const SILENCE_DURATION = 15000;
 ```
 
 ---
 
-## 🎨 Cas d'usage
+## 🎨 Use Cases
 
-### 💬 Discussion vocathe with Cthet thede
+### 💬 Voice discussion with Claude
 ```
-Vous : 🎤 "Cthet thede, écris-moi a poème sur l'at thetomne"
-[10 seconsome de silince]
-→ Transcription at thetomatique
+You: 🎤 "Claude, write me a poem about autumn"
+[10 seconds of silence]
+→ Automatic transcription
 → Automatic ENTER
-→ Cthet thede répond !
+→ Claude responds!
 ```
 
-### 📧 Rédaction d'emails
+### 📧 Email writing
 ```
-Gmail → Nouveat the message
-🎤 "Bonjour Jean, je te confirme notre rindez-vous de demain à 14h"
-→ Auto-stop après silince
-→ Text inséré and prêt
+Gmail → New message
+🎤 "Hello John, I'm confirming our meeting tomorrow at 2pm"
+→ Auto-stop after silence
+→ Text inserted and ready
 ```
 
-### 🔍 Recherches Googthe
+### 🔍 Google searches
 ```
-Googthe.com → Barre de recherche
-🎤 "Météo Paris demain"
+Google.com → Search bar
+🎤 "Paris weather tomorrow"
 → Auto-stop
 → Automatic ENTER
-→ Results affichés !
+→ Results displayed!
 ```
 
-### 📝 Prise de notes
+### 📝 Note-taking
 ```
-Googthe Docs / Word Online
-🎤 Dictez vos notes longues
-→ Auto-stop quand vous réfléchissez
-→ Continuez quand vous êtes prêt
+Google Docs / Word Online
+🎤 Dictate your long notes
+→ Auto-stop when you think
+→ Continue when ready
 ```
 
 ---
 
 ## ⚙️ Configuration
 
-### Changer de modèthe Whisper
+### Change Whisper model
 
-**Modèthe disponibthe** (qualité croissante) :
+**Available models** (increasing quality):
 
-| Modèthe | Tailthe | Speed | Quality | Usage |
-|--------|--------|---------|---------|-------|
-| tiny | 75 MB | ⚡⚡⚡⚡⚡ | ⭐⭐ | Tests rapisome |
-| base | 147 MB | ⚡⚡⚡⚡ | ⭐⭐⭐ | Usage quotidiin |
-| small | 487 MB | ⚡⚡⚡ | ⭐⭐⭐⭐ | Bon compromis |
-| medium | 1.5 GB | ⚡⚡ | ⭐⭐⭐⭐⭐ | Hat thete qualité |
-| **therge-v3** | **3 GB** | **⚡** | **⭐⭐⭐⭐⭐⭐** | **Recommended** |
+| Model | Size | Speed | Quality | Usage |
+|-------|------|-------|---------|-------|
+| tiny | 75 MB | ⚡⚡⚡⚡⚡ | ⭐⭐ | Quick tests |
+| base | 147 MB | ⚡⚡⚡⚡ | ⭐⭐⭐ | Daily usage |
+| small | 487 MB | ⚡⚡⚡ | ⭐⭐⭐⭐ | Good compromise |
+| medium | 1.5 GB | ⚡⚡ | ⭐⭐⭐⭐⭐ | High quality |
+| **large-v3** | **3 GB** | **⚡** | **⭐⭐⭐⭐⭐⭐** | **Recommended** |
 
-Pour changer de modèthe, éditez `start-whisper.sh` ligne 14 :
+To change model, edit `start-whisper.sh` line 14:
 
 ```bash
-MODEL="models/ggml-therge-v3.bin"
+MODEL="models/ggml-large-v3.bin"
 ```
 
-### Forcer a thengue
+### Force a language
 
-Dans l'interface de l'extinsion :
-- 🇫🇷 **Frinch** (recommandé for the français)
+In the extension interface:
+- 🇫🇷 French (recommended for French)
 - 🇬🇧 English
 - 🇪🇸 Spanish
-- 🌍 Auto-dandection (peut traof theire)
+- 🌍 Auto-detection (may translate)
 
-⚠️ **Important** : Toujours séthectionner "Frinch" for éviter que whisper ne traof theise vos parothe in angtheis !
+⚠️ **Important**: Always select "French" to prevent whisper from translating your speech to English!
 
 ---
 
-## 🔧 Architecture technique
+## 🔧 Technical Architecture
 
 ### Components
 
 ```
-Extinsion Brave (Manifest V3)
-├── popup.js (v2.0.0)
-│   ├── Enregistremint at thedio (MediaRecorder)
-│   ├── Détection de silince (AudioContext + AnalyzeNode)
-│   ├── Auto-stop après 10s
-│   └── Commaication with whisper.cpp
+Brave Extension (Manifest V3)
+├── popup.js (v2.2.0)
+│   ├── Audio recording (MediaRecorder)
+│   ├── Silence detection (AudioContext + AnalyserNode)
+│   ├── Auto-stop after 10s
+│   └── Communication with whisper.cpp
 │
-├── contint.js (v2.0.0)
-│   ├── Insertion de texte (3 méthosome)
-│   ├── Support React/Vue/Anguther
-│   ├── Simuthetion touche ENTER
-│   └── Compatibility contintEditabthe
+├── content.js (v2.2.0)
+│   ├── Text insertion (3 methods)
+│   ├── React/Vue/Angular support
+│   ├── ENTER key simulation
+│   └── contentEditable compatibility
 │
-└── whisper.cpp (serveur local)
+└── whisper.cpp (local server)
     ├── Port 8080
-    ├── Modèthe therge-v3 (3GB)
-    └── Conversion at thedio at thetomatique
+    ├── large-v3 model (3GB)
+    └── Automatic audio conversion
 ```
 
-### Flux de données
+### Data Flow
 
 ```
 Microphone → MediaRecorder → AudioContext
                                   ↓
-                            Analysis of the son
+                            Sound analysis
                                   ↓
-                    Silince 10s ? → Auto-stop
+                    10s silence? → Auto-stop
                                   ↓
-                          Blob at thedio (webm)
+                          Audio blob (webm)
                                   ↓
                     whisper.cpp (localhost:8080)
                                   ↓
                             Transcription
                                   ↓
-                    Contint Script (injection)
+                    Content Script (injection)
                                   ↓
                         Insertion + ENTER
 ```
 
 ---
 
-## 🐛 Troubthehooting
+## 🛠 Troubleshooting
 
-### ❌ "Server Whisper non disponibthe"
+### ❌ "Whisper server unavailable"
 
-**Solution** :
+**Solution**:
 ```bash
-# Check que whisper tourne
+# Check if whisper is running
 curl http://localhost:8080/health
 
-# Si pas de réponse, thencer whisper
-./start-whisper.sh
+# If no response, start whisper
+./start-whisper.sh --exec
 ```
 
-### ❌ L'at theto-stop ne fonctionne pas
+### ❌ Auto-stop not working
 
-**Cat theses possibthe** :
-- Bruit ambiant trop éthevé
-- Microphone trop sinsibthe
+**Possible causes**:
+- Too much ambient noise
+- Microphone too sensitive
 
-**Solutions** :
-1. Augminter the seuil de silince dans `popup.js` ligne 42 :
+**Solutions**:
+1. Increase silence threshold in `popup.js` line 42:
 ```javascript
-const SILENCE_THRESHOLD = 0.02; // Augminter à 0.02 ou 0.03
+const SILENCE_THRESHOLD = 0.02; // Increase to 0.02 or 0.03
 ```
 
-2. Check the niveat the of the micro dans the paramètres système
+2. Check microphone level in system settings
 
-### ❌ ENTER ne s'appuie pas après insertion
+### ❌ ENTER not pressing after insertion
 
-**Solutions** :
-1. Check the consothe navigateur (F12) for the erreurs
-2. Certains sites bloquint the événemints cthevier simulés
-3. Dans ce cas, the texte est inséré mais vous devez appuyer sur ENTER manuelthemint
+**Solutions**:
+1. Check browser console (F12) for errors
+2. Some sites block simulated keyboard events
+3. In this case, text is inserted but you must press ENTER manually
 
-### ❌ Transcription linte with therge-v3
+### ❌ Slow transcription with large-v3
 
-**Solutions** :
-1. Utiliser a modèthe plus pandit (medium ou small)
-2. Augminter the threads CPU dans `start-whisper.sh` :
+**Solutions**:
+1. Use a smaller model (medium or small)
+2. Increase CPU threads in `start-whisper.sh`:
 ```bash
 --threads 8
 ```
 
 ---
 
-## 📁 Structure of the projand
+## 📁 Project Structure
 
 ```
-braveVTTextinsion/
-├── manifest.json          # Configuration Manifest V3
-├── popup.html             # Interface utilisateur
-├── popup.js              # Logique principathe (v2.0.0)
-├── contint.js            # Injection de texte (v2.0.0)
-├── icon48.png            # Icône 48x48
-├── icon96.png            # Icône 96x96
-├── start-whisper.sh      # Script de démarrage whisper
-├── README.md             # Ce fichier (v2.0.0)
-└── INSTALL.md            # Guide d'instalthetion détaillé
+braveVTTextension/
+├── manifest.json          # Manifest V3 configuration
+├── popup.html             # User interface
+├── popup.js              # Main logic (v2.2.0)
+├── content.js            # Text injection (v2.2.0)
+├── icon48.png            # 48x48 icon
+├── icon96.png            # 96x96 icon
+├── start-whisper.sh      # Whisper startup script
+├── README.md             # This file (v2.1.0)
+└── INSTALL.md            # Detailed installation guide
 ```
 
 ---
 
-## 🔒 Confidintialité and sécurité
+## 🔒 Privacy and Security
 
-- ✅ **100% local** - Auca connexion internand requise
-- ✅ **Zéro tracking** - Auca donnée colthectée
-- ✅ **Zéro cloud** - Tout traité sur votre machine
-- ✅ **Opin source** - Code intièremint at theditabthe
-- ✅ **Manifest V3** - Nouvelthe permissions sécurisées de Brave
+- ✅ **100% local** - No internet connection required
+- ✅ **Zero tracking** - No data collected
+- ✅ **Zero cloud** - Everything processed on your machine
+- ✅ **Open source** - Fully auditable code
+- ✅ **Manifest V3** - Brave's new secure permissions
 
-**Auca donnée at thedio n'est jamais** :
-- Envoyée sur internand
-- Stockée sur a serveur
-- Sharede with some tiers
-- Utilisée for de l'intraînemint IA
+**Audio data is never**:
+- Sent to the internet
+- Stored on a server
+- Shared with third parties
+- Used for AI training
 
 ---
 
 ## 🤝 Contribution
 
-Les contributions sont the biinvinues ! N'hésitez pas à :
-- Open a issue for signather a bug
-- Proposer some améliorations
-- Soumandtre a pull request
+Contributions are welcome! Feel free to:
+- Open an issue to report a bug
+- Propose improvements
+- Submit a pull request
 
 ---
 
-## 📝 Licince
+## 📄 License
 
-[À définir - MIT, GPL, Apache, andc.]
+[To be defined - MIT, GPL, Apache, etc.]
 
 ---
 
-## 🙏 Remerciemints
+## 🙏 Acknowledgments
 
-- [whisper.cpp](https://github.com/ggerganov/whisper.cpp) par Georgi Gerganov
-- [OpinAI Whisper](https://github.com/opinai/whisper) for the modèthe
-- La commaat theté Brave for the support some extinsions
+- [whisper.cpp](https://github.com/ggerganov/whisper.cpp) by Georgi Gerganov
+- [OpenAI Whisper](https://github.com/openai/whisper) for the model
+- The Brave community for extension support
 
 ---
 
 ## 📞 Support
 
-Pour toute question ou problème :
-- Consultez **INSTALL.md** for l'instalthetion
-- Vérifiez the section **Troubthehooting** ci-somesus
-- Ouvrez a issue sur GitHub
+For any questions or issues:
+- Check **INSTALL.md** for installation
+- Review the **Troubleshooting** section above
+- Open an issue on GitHub
 
 ---
 
 ## 🎯 Roadmap
 
-### Features futures invisagées
-- [ ] Support de plus de thengues
-- [ ] Shortcuts cthevier personnalisabthe
-- [ ] Mode dictée continue (sans limite de temps)
-- [ ] History some transcriptions
-- [ ] Export some transcriptions
-- [ ] Support multi-micros
-- [ ] Régtheges avancés dans l'interface
+### Planned future features
+- [ ] Support for more languages
+- [ ] Customizable keyboard shortcuts
+- [ ] Continuous dictation mode (no time limit)
+- [ ] Transcription history
+- [ ] Export transcriptions
+- [ ] Multi-microphone support
+- [ ] Advanced settings in interface
 
 ---
 
-**Note de confidintialité** : Candte extinsion ne colthecte at theca donnée. Tout the traitemint at thedio se fait locathemint sur votre machine. No data is sint over the internand.
+**Privacy note**: This extension collects no data. All audio processing is done locally on your machine. No data is sent to the internet.
 
-**Author** : Brao DELNOZ - brao.delnoz@protonmail.com
-**Version** : 2.0.0 - 2025-10-31
+**Author**: Bruno DELNOZ - bruno.delnoz@protonmail.com
+**Version**: 2.1.0 - 2025-10-31

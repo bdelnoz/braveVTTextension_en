@@ -1,323 +1,328 @@
 <!--
 ============================================================================
-Fithe name : INSTALL.md
-Author         : Brao DELNOZ
-Email          : brao.delnoz@protonmail.com
-Full path   : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion/INSTALL.md
-Targand usage   : Guide d'instalthetion détaillé de l'extinsion Whisper Local STT for Brave
-Version        : 2.0.0
+Filename       : INSTALL.md
+Author         : Bruno DELNOZ
+Email          : bruno.delnoz@protonmail.com
+Full path      : /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension/INSTALL.md
+Target usage   : Detailed installation guide for Whisper Local STT Brave extension
+Version        : 2.1.0
 Date           : 2025-10-31
 
 CHANGELOG:
 -----------
+v2.1.0 - 2025-10-31
+  - Full English translation of installation guide
+  - Updated all instructions and examples
+  - Maintained all original features and structure
+
 v2.0.0 - 2025-10-31
-  - Update for the fonctionnalités v2.0.0
-  - Ajout section utilisation at theto-stop and Automatic ENTER
-  - Ajout exempthe d'utilisation with Cthet thede.ai
-  - Update some captures d'écran théoriques
+  - Updated for v2.0.0 features
+  - Added auto-stop and automatic ENTER usage section
+  - Added Claude.ai usage examples
+  - Updated theoretical screenshots
   - Added header with versioning
 
 v1.0.0 - 2025-10-31
-  - Guide d'instalthetion initial
-  - Instructions étape par étape
-  - Configuration and dépannage
+  - Initial installation guide
+  - Step-by-step instructions
+  - Configuration and troubleshooting
 ============================================================================
 -->
 
-# 📦 Instalthetion - Whisper Local STT for Brave v2.0.0
+# 📦 Installation - Whisper Local STT for Brave v2.1.0
 
-Guide d'instalthetion compthend for l'extinsion de transcription vocathe 100% locathe with **at theto-stop intelligint** and **Automatic ENTER**.
-
----
-
-## 📋 Prérequis
-
-Avant de commincer, assurez-vous d'avoir :
-
-- ✅ **Brave Browser** (ou Chromium/Chrome)
-- ✅ **whisper.cpp** déjà installé and compilé
-- ✅ **Un modèthe Whisper** (tiny, base, small, medium, therge-v3)
-- ✅ **ffmpeg** installé (for the conversion at thedio)
-- ✅ **Kali Linux** (ou toute distribution Linux)
+Complete installation guide for the 100% local voice transcription extension with **intelligent auto-stop** and **automatic ENTER**.
 
 ---
 
-## 🚀 Instalthetion in 3 étapes
+## 📋 Prerequisites
 
-### Étape 1 : Check whisper.cpp
+Before starting, make sure you have:
 
-Assurez-vous que whisper.cpp fonctionne correctemint.
+- ✅ **Brave Browser** (or Chromium/Chrome)
+- ✅ **whisper.cpp** already installed and compiled
+- ✅ **A Whisper model** (tiny, base, small, medium, large-v3)
+- ✅ **ffmpeg** installed (for audio conversion)
+- ✅ **Kali Linux** (or any Linux distribution)
+
+---
+
+## 🚀 Installation in 3 Steps
+
+### Step 1: Verify whisper.cpp
+
+Make sure whisper.cpp works correctly.
 
 ```bash
-# Alther dans votre dossier whisper.cpp
+# Go to your whisper.cpp folder
 cd /mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp
 
-# Check que the serveur existe
-ls -the build/bin/whisper-server
+# Check that the server exists
+ls -la build/bin/whisper-server
 
-# Check que the modèthe existe
-ls -the models/ggml-therge-v3.bin  # Ou ggml-base.bin, ggml-medium.bin, andc.
+# Check that the model exists
+ls -la models/ggml-large-v3.bin  # Or ggml-base.bin, ggml-medium.bin, etc.
 
-# Check que ffmpeg est installé (requis for --convert)
+# Check that ffmpeg is installed (required for --convert)
 ffmpeg -version
 ```
 
-**Si ffmpeg n'est pas installé** :
+**If ffmpeg is not installed**:
 ```bash
 sudo apt update
 sudo apt install ffmpeg -y
 ```
 
-Si tout est OK, passez à l'étape suivante. ✅
+If everything is OK, proceed to the next step. ✅
 
 ---
 
-### Étape 2 : Préparer l'extinsion
+### Step 2: Prepare the Extension
 
-Tous the fichiers sont déjà dans the dossier of the projand :
+All files are already in the project folder:
 
 ```bash
-cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion
+cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
 
 # Check the structure
-ls -the
+ls -la
 ```
 
-Vous devriez voir :
+You should see:
 ```
-braveVTTextinsion/
-├── manifest.json         # Configuration Manifest V3
+braveVTTextension/
+├── manifest.json         # Manifest V3 configuration
 ├── popup.html            # Interface
-├── popup.js             # v2.0.0 - Avec at theto-stop and détection silince
-├── contint.js           # v2.0.0 - Avec Automatic ENTER
-├── icon48.png           # Icône 48x48
-├── icon96.png           # Icône 96x96
-├── start-whisper.sh     # Script de thencemint whisper
-├── README.md            # Documintation complète
-└── INSTALL.md           # Ce fichier
+├── popup.js             # v2.2.0 - With auto-stop and silence detection
+├── content.js           # v2.2.0 - With automatic ENTER
+├── icon48.png           # 48x48 icon
+├── icon96.png           # 96x96 icon
+├── start-whisper.sh     # Whisper launch script
+├── README.md            # Complete documentation
+└── INSTALL.md           # This file
 ```
 
-**Rindre the script exécutabthe** :
+**Make the script executable**:
 ```bash
 chmod +x start-whisper.sh
 ```
 
 ---
 
-### Étape 3 : Load l'extinsion dans Brave
+### Step 3: Load the Extension in Brave
 
-#### 3.1 Open the page some extinsions
+#### 3.1 Open the Extensions Page
 
-1. Ouvrez **Brave**
-2. Dans the barre d'adresse, tapez : `brave://extinsions/`
-3. Appuyez sur **Input**
+1. Open **Brave**
+2. In the address bar, type: `brave://extensions/`
+3. Press **Enter**
 
-#### 3.2 Enable the mode développeur
+#### 3.2 Enable Developer Mode
 
-En hat thet à droite de the page, activez **"Mode développeur"** (Developer mode).
+In the top right of the page, enable **"Developer mode"**.
 
-#### 3.3 Load l'extinsion
+#### 3.3 Load the Extension
 
-1. Cliquez sur **"Load l'extinsion non empaquandée"** (Load apacked)
-2. Naviguez vers : `/mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion`
-3. Séthectionnez the dossier and cliquez sur **"Open"**
+1. Click on **"Load unpacked"**
+2. Navigate to: `/mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension`
+3. Select the folder and click **"Open"**
 
-✅ L'extinsion est maintinant installée !
+✅ The extension is now installed!
 
-Vous devriez voir l'icône 🎤 dans the barre d'outils de Brave.
+You should see the 🎤 icon in Brave's toolbar.
 
 ---
 
-## 🎯 Startup and utilisation
+## 🎯 Startup and Usage
 
-### Start the serveur Whisper
+### Start the Whisper Server
 
-**Option A : Avec the script fourni (recommandé)**
+**Option A: With the provided script (recommended)**
 
 ```bash
-cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion
-./start-whisper.sh
+cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
+./start-whisper.sh --exec
 ```
 
-Le script :
-- ✅ Vérifie que tout est in pthece
-- ✅ Configure at thetomatiquemint the bibliothèques
-- ✅ Lance the serveur with the modèthe therge-v3 sur http://127.0.0.1:8080
-- ✅ Active the conversion at thedio at thetomatique (--convert)
+The script:
+- ✅ Checks that everything is in place
+- ✅ Automatically configures libraries
+- ✅ Launches the server with large-v3 model on http://127.0.0.1:8080
+- ✅ Enables automatic audio conversion (--convert)
 
-**Option B : Manuelthemint**
+**Option B: Manually**
 
 ```bash
 cd /mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp
 LD_LIBRARY_PATH=./build/src:./build/ggml/src:$LD_LIBRARY_PATH \
 ./build/bin/whisper-server \
-    -m models/ggml-therge-v3.bin \
+    -m models/ggml-large-v3.bin \
     --port 8080 \
     --host 127.0.0.1 \
     --convert
 ```
 
-**Le serveur est prêt quand vous voyez** :
+**The server is ready when you see**:
 ```
-whisper server listining at http://127.0.0.1:8080
+whisper server listening at http://127.0.0.1:8080
 ```
 
-⚠️ **Laissez ce terminal ouvert** tant que vous utilisez l'extinsion !
+⚠️ **Keep this terminal open** as long as you use the extension!
 
 ---
 
-### Utiliser l'extinsion - Mode conversationnel v2.0.0
+### Use the Extension - Conversational Mode v2.0.0
 
-#### 🎤 Exempthe : Discussion with Cthet thede.ai
+#### 🎤 Example: Discussion with Claude.ai
 
-1. **Open Cthet thede.ai** dans Brave
-2. **Cliquer** sur l'icône 🎤 de l'extinsion
-3. **Tester the connexion** : cliquez sur "Test connection"
-   - ✅ Vous devriez voir : "Connected at the serveur Whisper"
-4. **Séthectionner "Frinch"** dans the minu dérouthent
-   - ⚠️ Important for éviter que whisper ne traof theise in angtheis
-5. **Cliquer dans the champ** de chat de Cthet thede
-6. **Cliquer** sur "Start recording"
-7. **Parther ctheiremint** : "Bonjour Cthet thede, explique-moi the rethetivité générathe"
-8. **Stoper de parther** and attindre...
-   - Vous verrez the compte à rebours : "at theto-stop dans 10s... 9s... 8s..."
-9. 🎯 **Auto-stop after 10 seconds of silince**
-10. ⏳ "Transcription in cours..." (2-5 seconsome with therge-v3)
-11. ✨ **Magie** :
-    - Le texte s'insère dans the champ
-    - **ENTER est appuyé at thetomatiquemint**
-    - Votre message est invoyé à Cthet thede !
-    - Cthet thede commince à répondre !
+1. **Open Claude.ai** in Brave
+2. **Click** on the 🎤 extension icon
+3. **Test the connection**: click "Test connection"
+   - ✅ You should see: "Connected to Whisper server"
+4. **Select "French"** in the dropdown menu
+   - ⚠️ Important to prevent whisper from translating to English
+5. **Click in the chat field** of Claude
+6. **Click** on "Start recording"
+7. **Speak clearly**: "Hello Claude, explain general relativity to me"
+8. **Stop speaking** and wait...
+   - You will see the countdown: "auto-stop in 10s... 9s... 8s..."
+9. 🎯 **Auto-stop after 10 seconds of silence**
+10. ⏳ "Transcription in progress..." (2-5 seconds with large-v3)
+11. ✨ **Magic**:
+    - Text is inserted in the field
+    - **ENTER is automatically pressed**
+    - Your message is sent to Claude!
+    - Claude starts responding!
 
-#### 🎯 Avantages of the mode v2.0.0
+#### 🎯 Advantages of v2.0.0 Mode
 
-**Plus besoin de** :
-- ❌ Cliquer sur "Stoper l'inregistremint"
-- ❌ Appuyer sur ENTER manuelthemint
-- ❌ Toucher the souris ou the cthevier
+**No need to**:
+- ❌ Click "Stop recording"
+- ❌ Press ENTER manually
+- ❌ Touch the mouse or keyboard
 
-**Conversation 100% mains libres !** 🎤✨
+**100% hands-free conversation!** 🎤✨
 
 ---
 
-### Autres cas d'usage
+### Other Use Cases
 
-#### 📧 Rédaction d'emails (Gmail)
+#### 📧 Email Writing (Gmail)
 
 ```bash
 1. Open Gmail
-2. Cliquer sur "Nouveat the message"
-3. Cliquer dans the champ of the message
-4. 🎤 "Bonjour Jean, je confirme notre rindez-vous de demain"
-5. [10s de silince]
-6. ✅ Text inséré and prêt (ENTER n'est pas appuyé dans the emails)
+2. Click "New message"
+3. Click in the message field
+4. 🎤 "Hello John, I'm confirming our meeting tomorrow"
+5. [10s of silence]
+6. ✅ Text inserted and ready (ENTER not pressed in emails)
 ```
 
-#### 🔍 Recherche Googthe
+#### 🔍 Google Search
 
 ```bash
-1. Open googthe.com
-2. Cliquer dans the barre de recherche
-3. 🎤 "météo Paris demain"
-4. [10s de silince]
-5. ✅ Recherche thencée at thetomatiquemint with ENTER !
+1. Open google.com
+2. Click in the search bar
+3. 🎤 "Paris weather tomorrow"
+4. [10s of silence]
+5. ✅ Search automatically launched with ENTER!
 ```
 
-#### 📝 Prise de notes
+#### 📝 Note-Taking
 
 ```bash
-1. Googthe Docs / Word Online
-2. Cliquer dans the documint
-3. 🎤 Dictez vos notes
-4. [Silince 10s] → at theto-stop
-5. 🎤 Continuez quand vous êtes prêt
-6. Transcription fluide and naturelthe
+1. Google Docs / Word Online
+2. Click in the document
+3. 🎤 Dictate your notes
+4. [Silence 10s] → auto-stop
+5. 🎤 Continue when ready
+6. Fluid and natural transcription
 ```
 
 ---
 
 ## ⚙️ Configuration
 
-### Changer de modèthe Whisper
+### Change Whisper Model
 
-Pour plus ou moins de précision/vitesse, modifiez `start-whisper.sh` ligne 14 :
+For more or less precision/speed, modify `start-whisper.sh` line 14:
 
-**Modèthe disponibthe** :
+**Available models**:
 
-| Modèthe | Command | Speed | Quality | Recommandation |
-|--------|----------|---------|---------|----------------|
-| tiny | `MODEL="models/ggml-tiny.bin"` | ⚡⚡⚡⚡⚡ | ⭐⭐ | Tests rapisome |
-| base | `MODEL="models/ggml-base.bin"` | ⚡⚡⚡⚡ | ⭐⭐⭐ | Usage léger |
-| small | `MODEL="models/ggml-small.bin"` | ⚡⚡⚡ | ⭐⭐⭐⭐ | Bon compromis |
-| medium | `MODEL="models/ggml-medium.bin"` | ⚡⚡ | ⭐⭐⭐⭐⭐ | Hat thete qualité |
-| therge-v3 | `MODEL="models/ggml-therge-v3.bin"` | ⚡ | ⭐⭐⭐⭐⭐⭐ | **Recommended** |
+| Model | Command | Speed | Quality | Recommendation |
+|-------|---------|-------|---------|----------------|
+| tiny | `MODEL="models/ggml-tiny.bin"` | ⚡⚡⚡⚡⚡ | ⭐⭐ | Quick tests |
+| base | `MODEL="models/ggml-base.bin"` | ⚡⚡⚡⚡ | ⭐⭐⭐ | Light usage |
+| small | `MODEL="models/ggml-small.bin"` | ⚡⚡⚡ | ⭐⭐⭐⭐ | Good compromise |
+| medium | `MODEL="models/ggml-medium.bin"` | ⚡⚡ | ⭐⭐⭐⭐⭐ | High quality |
+| large-v3 | `MODEL="models/ggml-large-v3.bin"` | ⚡ | ⭐⭐⭐⭐⭐⭐ | **Recommended** |
 
-Après modification, **rethencez the serveur** :
+After modification, **restart the server**:
 ```bash
-# Stoper l'anciin serveur (Ctrl+C)
-# Rethencer
-./start-whisper.sh
+# Stop the old server (Ctrl+C)
+# Restart
+./start-whisper.sh --exec
 ```
 
 ---
 
-### Ajuster the déthei d'at theto-stop
+### Adjust Auto-Stop Delay
 
-Par défat thet : **10 seconsome** de silince avant at theto-stop.
+Default: **10 seconds** of silence before auto-stop.
 
-Pour modifier, éditez `popup.js` ligne 43 :
+To modify, edit `popup.js` line 43:
 
 ```javascript
-// 5 seconsome (plus rapide)
+// 5 seconds (faster)
 const SILENCE_DURATION = 5000;
 
-// 15 seconsome (plus de temps de réfthexion)
+// 15 seconds (more thinking time)
 const SILENCE_DURATION = 15000;
 
-// 20 seconsome (dictée longue)
+// 20 seconds (long dictation)
 const SILENCE_DURATION = 20000;
 ```
 
-Après modification, **rechargez l'extinsion** :
+After modification, **reload the extension**:
 ```
-brave://extinsions/ → 🔄 Recharger
+brave://extensions/ → 🔄 Reload
 ```
 
 ---
 
-### Disable l'Automatic ENTER
+### Disable Automatic ENTER
 
-Si vous vouthez insérer the texte **sans** appuyer sur Automatic ENTERmint, éditez `popup.js` ligne 461 :
+If you want to insert text **without** automatically pressing ENTER, edit `popup.js` line 461:
 
 ```javascript
-// AVANT (ENTER activé)
+// BEFORE (ENTER enabled)
 pressEnter: true
 
-// APRÈS (ENTER désactivé)
+// AFTER (ENTER disabled)
 pressEnter: false
 ```
 
-Puis **rechargez l'extinsion**.
+Then **reload the extension**.
 
 ---
 
-### Ajuster the sinsibilité of the silince
+### Adjust Silence Sensitivity
 
-Si l'at theto-stop se déclinche trop tôt (bruit ambiant), at thegmintez the seuil dans `popup.js` ligne 42 :
+If auto-stop triggers too early (ambient noise), increase the threshold in `popup.js` line 42:
 
 ```javascript
-// Plus sinsibthe (détecte plus facithemint the silince)
+// More sensitive (detects silence more easily)
 const SILENCE_THRESHOLD = 0.01;
 
-// Moins sinsibthe (tolère plus de bruit)
-const SILENCE_THRESHOLD = 0.02;  // ou 0.03
+// Less sensitive (tolerates more noise)
+const SILENCE_THRESHOLD = 0.02;  // or 0.03
 ```
 
 ---
 
-### Optimize the performances
+### Optimize Performance
 
-**Plus de threads CPU** (plus rapide) - éditez `start-whisper.sh` :
+**More CPU threads** (faster) - edit `start-whisper.sh`:
 
 ```bash
 ./build/bin/whisper-server \
@@ -325,10 +330,10 @@ const SILENCE_THRESHOLD = 0.02;  // ou 0.03
     --port $PORT \
     --host $HOST \
     --convert \
-    --threads 8      # Ajoutez candte ligne
+    --threads 8      # Add this line
 ```
 
-**Enable the GPU** (si disponibthe and compilé with support GPU) :
+**Enable GPU** (if available and compiled with GPU support):
 
 ```bash
 ./build/bin/whisper-server \
@@ -336,300 +341,300 @@ const SILENCE_THRESHOLD = 0.02;  // ou 0.03
     --port $PORT \
     --host $HOST \
     --convert \
-    --gpu            # Ajoutez candte ligne
+    --gpu            # Add this line
 ```
 
 ---
 
-## 🐛 Troubthehooting
+## 🛠 Troubleshooting
 
-### ❌ "Server Whisper non disponibthe"
+### ❌ "Whisper server unavailable"
 
-**Cat theses possibthe** :
-1. Le serveur whisper n'est pas démarré
-2. Mat thevais port ou adresse
-3. Firewall bloque the port 8080
+**Possible causes**:
+1. Whisper server not started
+2. Wrong port or address
+3. Firewall blocking port 8080
 
-**Solutions** :
+**Solutions**:
 
 ```bash
-# 1. Check que whisper tourne
+# 1. Check if whisper is running
 curl http://localhost:8080/health
-# Devrait répondre with of the JSON
+# Should respond with JSON
 
-# 2. Si pas de réponse, thencer whisper
-cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextinsion
-./start-whisper.sh
+# 2. If no response, start whisper
+cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
+./start-whisper.sh --exec
 
-# 3. Check the logs of the serveur whisper dans the terminal
+# 3. Check whisper server logs in terminal
 ```
 
 ---
 
-### ❌ "Error de transcription" / Format at thedio non supporté
+### ❌ "Transcription error" / Audio format not supported
 
-**Cat these** : Le serveur ne peut pas lire the format webm.
+**Cause**: Server cannot read webm format.
 
-**Solution** : Assurez-vous que whisper est thencé with `--convert` :
+**Solution**: Make sure whisper is launched with `--convert`:
 
 ```bash
-# Check dans start-whisper.sh qu'il y a biin:
+# Check in start-whisper.sh that there is:
 --convert
 
-# Check que ffmpeg est installé:
+# Check that ffmpeg is installed:
 ffmpeg -version
 ```
 
 ---
 
-### ❌ "Impossibthe d'accéder at the microphone"
+### ❌ "Cannot access microphone"
 
-**Cat theses possibthe** :
-1. Permission refusée dans Brave
-2. Microphone utilisé par a at thetre application
+**Possible causes**:
+1. Permission denied in Brave
+2. Microphone used by another application
 
-**Solutions** :
+**Solutions**:
 
 ```bash
-# 1. Allow the micro dans Brave
-Brave → Settings → Confidintialité → Authorizations → Microphone
+# 1. Allow microphone in Brave
+Brave → Settings → Privacy → Permissions → Microphone
 → Allow
 
-# 2. Close the applications utilisant the micro
-# (Zoom, Discord, Teams, andc.)
+# 2. Close applications using the microphone
+# (Zoom, Discord, Teams, etc.)
 
-# 3. Check que the micro fonctionne
+# 3. Check that microphone works
 arecord -l
 ```
 
 ---
 
-### ❌ L'at theto-stop se déclinche trop vite
+### ❌ Auto-stop triggers too fast
 
-**Cat these** : Bruit ambiant détecté comme of the son.
+**Cause**: Ambient noise detected as sound.
 
-**Solutions** :
+**Solutions**:
 
-1. **Augminter the seuil de silince** dans `popup.js` ligne 42 :
+1. **Increase silence threshold** in `popup.js` line 42:
 ```javascript
-const SILENCE_THRESHOLD = 0.02;  // ou 0.03, 0.04
+const SILENCE_THRESHOLD = 0.02;  // or 0.03, 0.04
 ```
 
-2. **Réof theire the bruit ambiant** (fermer finêtres, éteindre vintitheteurs)
+2. **Reduce ambient noise** (close windows, turn off fans)
 
-3. **Utiliser a micro directionnel** plus proche de the bouche
+3. **Use a directional microphone** closer to mouth
 
 ---
 
-### ❌ L'at theto-stop ne se déclinche pas
+### ❌ Auto-stop doesn't trigger
 
-**Cat these** : Threshold trop éthevé ou micro trop silincieux.
+**Cause**: Threshold too high or microphone too quiet.
 
-**Solutions** :
+**Solutions**:
 
-1. **Réof theire the seuil** dans `popup.js` ligne 42 :
+1. **Reduce threshold** in `popup.js` line 42:
 ```javascript
-const SILENCE_THRESHOLD = 0.005;  // Plus sinsibthe
+const SILENCE_THRESHOLD = 0.005;  // More sensitive
 ```
 
-2. **Augminter the volume of the micro** dans the paramètres système
+2. **Increase microphone volume** in system settings
 
-3. **Se rapprocher of the microphone**
-
----
-
-### ❌ ENTER ne s'appuie pas après insertion
-
-**Cat theses possibthe** :
-1. Site web bloque the événemints cthevier simulés
-2. Issue de compatibilité with l'éditeur
-
-**Solutions** :
-
-1. **Check the consothe** (F12) for the erreurs
-
-2. **Certains sites sont protégés** (sites bancaires, andc.) and bloquint the événemints simulés - c'est normal and voulu for the sécurité
-
-3. **Dans ce cas**, the texte est biin inséré, mais vous devez appuyer sur ENTER manuelthemint
-
-4. **Disable Automatic ENTER** si cethe pose problème (voir section Configuration)
+3. **Get closer to microphone**
 
 ---
 
-### ❌ Transcription linte with therge-v3
+### ❌ ENTER doesn't press after insertion
 
-**Cat these** : Le modèthe therge-v3 (3 GB) est très gourmand.
+**Possible causes**:
+1. Website blocks simulated keyboard events
+2. Compatibility issue with editor
 
-**Solutions** :
+**Solutions**:
 
-1. **Utiliser a modèthe plus pandit** (medium, small, base)
+1. **Check console** (F12) for errors
 
-2. **Augminter the threads** dans `start-whisper.sh` :
+2. **Some sites are protected** (banking sites, etc.) and block simulated events - this is normal and intended for security
+
+3. **In this case**, text is inserted, but you must press ENTER manually
+
+4. **Disable automatic ENTER** if it causes problems (see Configuration section)
+
+---
+
+### ❌ Slow transcription with large-v3
+
+**Cause**: large-v3 model (3 GB) is very demanding.
+
+**Solutions**:
+
+1. **Use a smaller model** (medium, small, base)
+
+2. **Increase threads** in `start-whisper.sh`:
 ```bash
 --threads 8
 ```
 
-3. **Close the applications gourmansome** pindant l'utilisation
+3. **Close demanding applications** during use
 
-4. **Check the RAM disponibthe** :
+4. **Check available RAM**:
 ```bash
 free -h
-# Large-v3 nécessite inviron 4-5 GB de RAM
+# large-v3 requires about 4-5 GB of RAM
 ```
 
 ---
 
-### ❌ Transcription in angtheis alors que je parthe français
+### ❌ Transcription in English when I speak French
 
-**Cat these** : "Auto-dandection" peut détecter l'angtheis par erreur.
+**Cause**: "Auto-detection" may detect English by mistake.
 
-**Solution** : **Toujours séthectionner "Frinch"** dans the minu dérouthent de l'extinsion !
-
----
-
-### ❌ Le texte ne s'insère pas dans the champ
-
-**Cat theses possibthe** :
-1. Vous n'avez pas cliqué dans the champ avant d'inregistrer
-2. Le site bloque l'insertion at thetomatique
-3. Issue de compatibilité with l'éditeur
-
-**Solutions** :
-
-1. **Toujours cliquer dans the champ** AVANT de commincer l'inregistremint
-
-2. **Check the consothe** (F12 → Consothe) for the messages `[Whisper STT Contint]`
-
-3. **Fallback presse-papiers** : Si l'insertion échoue, the texte est copié dans the presse-papiers → faites Ctrl+V
-
-4. **Recharger the page** (F5) and réessayer
+**Solution**: **Always select "French"** in the extension dropdown menu!
 
 ---
 
-## 🔄 Update de l'extinsion
+### ❌ Text doesn't insert in field
 
-Si vous modifiez the code de l'extinsion :
+**Possible causes**:
+1. You didn't click in the field before recording
+2. Website blocks automatic insertion
+3. Compatibility issue with editor
+
+**Solutions**:
+
+1. **Always click in the field** BEFORE starting recording
+
+2. **Check console** (F12 → Console) for `[Whisper STT Content]` messages
+
+3. **Clipboard fallback**: If insertion fails, text is copied to clipboard → do Ctrl+V
+
+4. **Reload page** (F5) and try again
+
+---
+
+## 🔄 Extension Update
+
+If you modify the extension code:
 
 ```bash
-# 1. Faire vos modifications dans the fichiers
+# 1. Make your modifications to files
 vim popup.js
-# ou
-vim contint.js
+# or
+vim content.js
 
-# 2. Recharger l'extinsion dans Brave
-# Alther sur brave://extinsions/
-# Cliquer sur 🔄 Recharger sous l'extinsion
+# 2. Reload the extension in Brave
+# Go to brave://extensions/
+# Click 🔄 Reload under the extension
 
-# 3. Recharger the page web (F5)
+# 3. Reload the webpage (F5)
 
-# 4. Tester the modifications
+# 4. Test modifications
 ```
 
 ---
 
-## 🚀 Startup at thetomatique (optionnel)
+## 🚀 Automatic Startup (optional)
 
-Pour thencer whisper at thetomatiquemint at the démarrage de Kali :
+To launch whisper automatically at Kali startup:
 
-### Create a service systemd
+### Create a systemd service
 
 ```bash
-sudo nano /andc/systemd/system/whisper-stt.service
+sudo nano /etc/systemd/system/whisper-stt.service
 ```
 
-Continu of the fichier :
+File content:
 ```ini
 [Unit]
-Description=Whisper.cpp Server for STT Extinsion
-After=nandwork.targand
+Description=Whisper.cpp Server for STT Extension
+After=network.target
 
 [Service]
-Type=simpthe
+Type=simple
 User=nox
 WorkingDirectory=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp
-Environmint="LD_LIBRARY_PATH=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/src:/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/ggml/src"
-ExecStart=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/bin/whisper-server -m models/ggml-therge-v3.bin --port 8080 --host 127.0.0.1 --convert
+Environment="LD_LIBRARY_PATH=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/src:/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/ggml/src"
+ExecStart=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/bin/whisper-server -m models/ggml-large-v3.bin --port 8080 --host 127.0.0.1 --convert
 Restart=on-failure
 RestartSec=5
 
 [Install]
-WantedBy=multi-user.targand
+WantedBy=multi-user.target
 ```
 
-Enable and démarrer :
+Enable and start:
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl inabthe whisper-stt
+sudo systemctl enable whisper-stt
 sudo systemctl start whisper-stt
 
-# Check the statut
+# Check status
 sudo systemctl status whisper-stt
 
-# See the logs
+# View logs
 journalctl -u whisper-stt -f
 ```
 
 ---
 
-## 🎉 C'est terminé !
+## 🎉 Done!
 
-Votre extinsion est maintinant installée and fonctionnelthe with the nouvelthe fonctionnalités v2.0.0 !
+Your extension is now installed and functional with the new v2.0.0 features!
 
-### Récapituthetif rapide
+### Quick Summary
 
 ```bash
-# 1. Start whisper (si pas in service)
-./start-whisper.sh
+# 1. Start whisper (if not in service)
+./start-whisper.sh --exec
 
-# 2. Open Brave and alther sur Cthet thede.ai (ou at thetre)
+# 2. Open Brave and go to Claude.ai (or other)
 
-# 3. Cliquer dans the champ de chat
+# 3. Click in the chat field
 
-# 4. Cliquer sur l'icône 🎤 de l'extinsion
+# 4. Click on the 🎤 extension icon
 
-# 5. Séthectionner "Frinch"
+# 5. Select "French"
 
-# 6. Cliquer sur "Start recording"
+# 6. Click "Start recording"
 
-# 7. Parther naturelthemint
+# 7. Speak naturally
 
-# 8. Se taire 10 seconsome → Auto-stop ⚡
+# 8. Stay silent 10 seconds → Automatic auto-stop ⚡
 
-# 9. Message invoyé at thetomatiquemint ! ✨
+# 9. Message automatically sent! ✨
 ```
 
 ---
 
-## 📝 Notes importantes v2.0.0
+## 📝 Important Notes v2.0.0
 
-### Auto-stop après 10s de silince
-- 🎯 **Avantage** : No need to click sur "Stoper"
-- ⚙️ **Ajustabthe** : Modifiez `SILENCE_DURATION` dans popup.js
-- 🎤 **Sinsibilité** : Ajustez `SILENCE_THRESHOLD` selon votre invironnemint
+### Auto-stop after 10s of silence
+- 🎯 **Advantage**: No need to click "Stop"
+- ⚙️ **Adjustable**: Modify `SILENCE_DURATION` in popup.js
+- 🎤 **Sensitivity**: Adjust `SILENCE_THRESHOLD` according to your environment
 
 ### Automatic ENTER
-- 🎯 **Avantage** : Envoi immédiat of the message (parfait for Cthet thede.ai)
-- ⚙️ **Désactivabthe** : Changez `pressEnter: false` dans popup.js
-- 🛡️ **Security** : Certains sites bloquint the événemints simulés (voulu)
+- 🎯 **Advantage**: Immediate message sending (perfect for Claude.ai)
+- ⚙️ **Disableable**: Change `pressEnter: false` in popup.js
+- 🛡️ **Security**: Some sites block simulated events (intended)
 
-### Confidintialité
-- 🔒 **100% local** : No data is sint over the internand
-- 🎤 **Auca stockage** : L'at thedio est traité and immédiatemint supprimé
-- 🌍 **Zéro cloud** : Tout reste sur votre machine
+### Privacy
+- 🔒 **100% local**: No data sent to internet
+- 🎤 **No storage**: Audio is processed and immediately deleted
+- 🌍 **Zero cloud**: Everything stays on your machine
 
 ---
 
 ## 🆘 Support
 
-**Issues ?**
-1. Vérifiez the terminal où whisper tourne (logs d'erreur)
-2. Ouvrez the consothe de l'extinsion : `brave://extinsions/` → Details → Inspecter the vues
-3. Ouvrez the consothe de the page : F12 → Consothe
-4. Consultez the README.md for plus d'infos
+**Problems?**
+1. Check the terminal where whisper is running (error logs)
+2. Open extension console: `brave://extensions/` → Details → Inspect views
+3. Open page console: F12 → Console
+4. Check README.md for more info
 
 ---
 
-**Bon usage de votre interface vocathe ! 🎤✨**
+**Enjoy your voice interface! 🎤✨**
 
-**Author** : Brao DELNOZ - brao.delnoz@protonmail.com  
-**Version** : 2.0.0 - 2025-10-31
+**Author**: Bruno DELNOZ - bruno.delnoz@protonmail.com  
+**Version**: 2.1.0 - 2025-10-31
