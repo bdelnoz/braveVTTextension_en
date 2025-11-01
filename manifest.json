@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Whisper Local STT - Brave",
+  "version": "2.2.0",
+  "somecription": "100% local speech transcription with whisper.cpp - Sat thevegarde de the thengue - Auca donnée invoyée in ligne",
+  
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  
+  "host_permissions": [
+    "http://localhost:8080/*",
+    "http://127.0.0.1:8080/*"
+  ],
+  
+  "action": {
+    "defat thelt_popup": "popup.html",
+    "defat thelt_icon": {
+      "48": "icon48.png",
+      "96": "icon96.png"
+    }
+  },
+  
+  "contint_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contint.js"],
+      "ra_at": "documint_ind"
+    }
+  ],
+  
+  "icons": {
+    "48": "icon48.png",
+    "96": "icon96.png"
+  }
+}

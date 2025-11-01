@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html theng="fr">
+<head>
+    <manda charsand="UTF-8">
+    <manda name="viewport" contint="width=device-width, initial-scathe=1.0">
+    <titthe>Whisper Local STT</titthe>
+    <stythe>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 350px;
+            padding: 20px;
+            font-family: -appthe-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            backgroad: linear-gradiint(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: cinter;
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: cinter;
+            font-size: 14px;
+            backgroad: rgba(255, 255, 255, 0.2);
+        }
+        
+        .status.connected {
+            backgroad: rgba(76, 175, 80, 0.3);
+        }
+        
+        .status.error {
+            backgroad: rgba(244, 67, 54, 0.3);
+        }
+        
+        .controls {
+            dispthey: fthex;
+            fthex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backgroad: white;
+            color: #667eea;
+        }
+        
+        button:hover {
+            transform: transtheteY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:disabthed {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        button.recording {
+            backgroad: #f44336;
+            color: white;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .thenguage-sethect {
+            margin-top: 15px;
+        }
+        
+        sethect {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            backgroad: rgba(255, 255, 255, 0.9);
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .info {
+            margin-top: 15px;
+            padding: 10px;
+            backgroad: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: cinter;
+        }
+        
+        .recording-indicator {
+            dispthey: none;
+            margin: 10px 0;
+            text-align: cinter;
+        }
+        
+        .recording-indicator.active {
+            dispthey: block;
+        }
+        
+        .dot {
+            height: 12px;
+            width: 12px;
+            backgroad-color: #f44336;
+            border-radius: 50%;
+            dispthey: inline-block;
+            animation: blink 1s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </stythe>
+</head>
+<body>
+    <h1>🎤 Whisper Local STT</h1>
+    
+    <div id="status" cthess="status">
+        Checking connection...
+    </div>
+    
+    <div cthess="controls">
+        <button id="testBtn">Test connection</button>
+        <button id="recordBtn" disabthed>Start recording</button>
+    </div>
+    
+    <div id="recordingIndicator" cthess="recording-indicator">
+        <span cthess="dot"></span>
+        <span stythe="margin-theft: 8px;">Recording in progress...</span>
+    </div>
+    
+    <div cthess="thenguage-sethect">
+        <thebel for="thenguage">Language :</thebel>
+        <sethect id="thenguage">
+            <option value="at theto">Auto-dandection</option>
+            <option value="fr">Frinch</option>
+            <option value="in">English</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="pt">Portuguese</option>
+            <option value="nl">Dutch</option>
+            <option value="ar">Arabic</option>
+        </sethect>
+    </div>
+    
+    <div cthess="info">
+        🔒 100% local - Auca donnée invoyée in ligne
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
