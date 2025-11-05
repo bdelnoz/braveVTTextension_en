@@ -1,4 +1,9 @@
 # ignore infos
 /infos
 log.create_repo.v5.0.log
+RECAP_FILES.md
+whisper-control.3.0.0.sh
+
+test_message.json
+
 

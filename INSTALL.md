@@ -3,40 +3,29 @@
 Filename       : INSTALL.md
 Author         : Bruno DELNOZ
 Email          : bruno.delnoz@protonmail.com
-Version        : 3.0.0
-Date           : 2025-11-01
+Version        : 3.0.1
+Date           : 2025-11-02
 
 CHANGELOG:
 -----------
+v3.0.1 - 2025-11-02
+  - Added v3.0.1 bug fixes section
+  - Updated troubleshooting for insertion
+  - Added "click in field first" instructions
+  - Known issues documented
+
 v3.0.0 - 2025-11-01
   - Complete rewrite for v3.0.0 floating widget
   - Native Messaging Host installation guide
   - Model selection usage documentation
   - Updated all installation steps
   - New troubleshooting for Native Host
-
-v2.1.0 - 2025-10-31
-  - Full English translation of installation guide
-  - Updated all instructions and examples
-  - Maintained all original features and structure
-
-v2.0.0 - 2025-10-31
-  - Updated for v2.0.0 features
-  - Added auto-stop and automatic ENTER usage section
-  - Added Claude.ai usage examples
-  - Updated theoretical screenshots
-  - Added header with versioning
-
-v1.0.0 - 2025-10-31
-  - Initial installation guide
-  - Step-by-step instructions
-  - Configuration and troubleshooting
 ============================================================================
 -->
 
-# 📦 Installation - Whisper Local STT for Brave v3.0.0
+# 📦 Installation - Whisper Local STT for Brave v3.0.1
 
-Complete installation guide for the 100% local voice transcription extension with **floating widget** and **dynamic model selection**.
+Complete installation guide for the 100% local voice transcription extension with **floating widget** and **fixed text insertion**.
 
 ---
 
@@ -56,304 +45,220 @@ Before starting, make sure you have:
 
 ### Step 1: Verify whisper.cpp
 
-Make sure whisper.cpp works correctly.
-
 ```bash
 # Go to your whisper.cpp folder
-cd /mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp
+cd /path/to/whisper.cpp
 
-# Check that the server exists
+# Check server exists
 ls -la build/bin/whisper-server
 
-# Check that models exist
+# Check models exist
 ls -la models/ggml-*.bin
 
-# Check that ffmpeg is installed
+# Check ffmpeg
 ffmpeg -version
 ```
 
-**If ffmpeg is not installed**:
+**If ffmpeg missing:**
 ```bash
 sudo apt update
 sudo apt install ffmpeg -y
 ```
 
-If everything is OK, proceed to the next step. ✅
+✅ All good? Continue!
 
 ---
 
-### Step 2: Load the Extension in Brave
+### Step 2: Load Extension in Brave
 
-#### 2.1 Open the Extensions Page
+#### 2.1 Open Extensions Page
 
-1. Open **Brave**
-2. In the address bar, type: `brave://extensions/`
-3. Press **Enter**
+```
+brave://extensions/
+```
 
 #### 2.2 Enable Developer Mode
 
-In the top right of the page, enable **"Developer mode"**.
+Toggle "Developer mode" in top-right corner.
 
-#### 2.3 Load the Extension
+#### 2.3 Load Extension
 
-1. Click on **"Load unpacked"**
-2. Navigate to: `/mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension`
-3. Select the folder and click **"Open"**
+1. Click "Load unpacked"
+2. Navigate to your extension folder
+3. Select and open
 
-✅ The extension is now installed!
-
-You should NOT see an icon in the toolbar (v3.0.0 uses floating widget).
+✅ Extension installed!
 
 ---
 
-### Step 3: Install Native Messaging Host
+### Step 3: Install Native Messaging Host (Optional)
 
-**This step is REQUIRED for model selection feature!**
-
-#### 3.1 What is Native Messaging Host?
-
-It's a bridge that allows the extension to:
-- List available Whisper models
-- Switch models dynamically
-- Control the whisper server
-
-Without it, you can still use the extension, but model selection won't work.
-
-#### 3.2 Automatic Installation
+**Only needed for model selection feature!**
 
 ```bash
-cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
+cd /path/to/braveVTTextension
 
 # Run installer
 ./install.sh --install-native
+
+# Follow prompts:
+# - Browser: Brave
+# - Extension ID: [copy from brave://extensions/]
 ```
 
-The installer will:
-1. **Detect your browser** (Brave/Chrome/Chromium)
-2. **Ask for Extension ID**
-3. **Install Native Host** in correct directory
-4. **Configure everything** automatically
-
-#### 3.3 Finding Extension ID
-
-When the installer asks for Extension ID:
-
+**Finding Extension ID:**
 1. Go to `brave://extensions/`
 2. Find "Whisper Local STT - Brave - En"
-3. Enable "Developer mode" if not already enabled
-4. **Copy the ID** (long alphanumeric string)
+3. Copy the long ID (e.g., `abcdef...`)
 
-Example: `abcdefghijklmnopqrstuvwxyz123456`
-
-#### 3.4 Verification
-
-After installation, verify:
-
+**Verify installation:**
 ```bash
-# Check Native Host manifest exists
 ls -la ~/.config/BraveSoftware/Brave-Browser/NativeMessagingHosts/com.whisper.control.json
-
-# Check control script is executable
-ls -la whisper-control.sh
 ```
 
-✅ If both exist, Native Host is installed correctly!
-
-**Important**: Restart Brave completely after Native Host installation.
+⚠️ **Important:** Restart Brave completely after installation!
 
 ---
 
-### Step 4: Start the Whisper Server
+### Step 4: Start Whisper Server
 
 ```bash
-cd /mnt/data2_78g/Security/scripts/Projects_web/braveVTTextension
+cd /path/to/braveVTTextension
 ./start-whisper.sh --exec
 ```
 
-**Options**:
-
-```bash
-# Start with specific model
-./start-whisper.sh --exec --model ggml-large-v3.bin
-
-# List available models
-./start-whisper.sh --listmodel
-
-# Test connection
-./start-whisper.sh --test
-```
-
-**The server is ready when you see**:
+**Server ready when you see:**
 ```
 whisper server listening at http://127.0.0.1:8080
 ```
 
-⚠️ **Keep this terminal open** as long as you use the extension!
+⚠️ Keep this terminal open while using extension!
 
 ---
 
-## 🎯 First Use
+## 🎯 First Use - v3.0.1 Important!
 
 ### 1. Open any webpage
 
-Open any website in Brave (e.g., claude.ai, google.com, etc.)
+Example: claude.ai, google.com, etc.
 
 ### 2. Widget appears automatically
 
-You should see a **purple floating widget** in the bottom-right corner:
-
+Purple floating widget in bottom-right corner:
 ```
-┌─────────────────────────────┐
-│  🎤 Whisper STT        [─] │
-├─────────────────────────────┤
-│  🟢 Connected (medium)      │
-│                             │
-│  🤖 [medium ▼]              │
-│  🇫🇷 [French ▼]             │
-│  ⏱️  [10 seconds ▼]         │
-│                             │
-│      [🎤 START]             │
-└─────────────────────────────┘
+┌──────────────────────┐
+│ 🎤 Whisper STT  [─] │
+├──────────────────────┤
+│ 🟢 Connected        │
+│ 🤖 Model: medium    │
+│ 🇫🇷 Language: French│
+│ ⏱️  Delay: 10s      │
+│ [🎤 START]          │
+└──────────────────────┘
 ```
 
-If you don't see it:
-- Check extension is loaded: `brave://extensions/`
-- Reload the extension
-- Reload the webpage (F5)
+Widget width: **280px** (compact!)
 
-### 3. Configure the widget
+### 3. ⚠️ IMPORTANT v3.0.1: Click in field FIRST!
 
-**Server Status**:
-- 🟢 **Connected** - Ready to use
-- 🔴 **Disconnected** - Start whisper server
-- 🟡 **Restarting...** - Model switch in progress
+**This is critical for text insertion to work:**
 
-**Model Selection** 🤖:
-- Click dropdown to see available models
-- Select a model → Whisper restarts automatically
-- Wait 5-15 seconds for restart
+```
+✅ CORRECT ORDER:
+1. Click in text field (Google search, Claude chat, etc.)
+2. Click START in widget
+3. Speak
+4. Text inserts correctly!
 
-**Language** 🇫🇷:
-- Always select your language!
-- Don't use "Auto-detection" unless necessary
+❌ WRONG ORDER:
+1. Click START first
+2. Then click in field
+3. Text won't insert!
+```
 
-**Delay** ⏱️:
-- Choose auto-stop delay (5s to 30s)
-- Default: 10 seconds
+**Why?** The widget tracks your last clicked field.
 
 ### 4. Test recording
 
-1. **Click in a text field** (e.g., Google search bar)
-2. **Click START** 🎤 in widget
-3. **Speak clearly**: "Hello, this is a test"
+1. **Click in a text field**
+2. **Click START** in widget
+3. **Speak clearly** for 2-3 seconds
 4. **Stay silent 10 seconds** → Auto-stop
 5. **Text appears** in the field
-6. **ENTER is pressed** automatically
+6. **ENTER pressed** automatically
 
-✅ It works! 🎉
+✅ It works!
 
 ---
 
-## 🎨 Widget Features
+## 🎨 Widget Features v3.0.1
 
-### Dragging the Widget
+### Compact Size ✨ NEW!
 
-1. **Click and hold** on "🎤 Whisper STT" title bar
-2. **Drag** to desired position
-3. **Release** - position is saved automatically
+- **Width:** 280px (reduced from 350px)
+- **Minimized:** 50x50px (reduced from 70x70px)
+- Takes less screen space!
 
-Next time you open a page, widget appears at same position!
+### Minimizing
 
-### Minimizing the Widget
+1. Click **[─]** button
+2. Widget becomes small 🎤 icon
+3. Click icon to expand
 
-1. **Click [─]** button in top-right
-2. Widget becomes a small 🎤 icon
-3. **Click icon** to expand again
+### Position
 
-Minimized state is also saved!
+⚠️ Drag not working in v3.0.1 (known issue)
 
-### Widget States
-
-**Normal**:
-- Full interface visible
-- All controls accessible
-
-**Recording** 🔴:
-- Shows "RECORDING"
-- Countdown: "Auto-stop in: 8s..."
-- STOP button replaces START button
-
-**Minimized**:
-- Small 🎤 icon (70x70px)
-- Click to expand
-- Still functional!
+Position auto-saved for each domain.
 
 ---
 
 ## 🎯 Usage Examples
 
-### Example 1: Conversation with Claude.ai
+### Example 1: Claude.ai Conversation
 
-```bash
+```
 1. Open https://claude.ai
-2. Widget is already visible in bottom-right
-3. Status shows: 🟢 Connected (medium)
+2. Widget visible in bottom-right
+3. Click in Claude's chat field ← IMPORTANT!
 4. Select: 🇫🇷 French
 5. Select: ⏱️ 10 seconds
-6. Click in Claude's chat field
-7. Click START 🎤
-8. Speak: "Hello Claude, explain photosynthesis"
-9. Stay silent 10 seconds
-10. → Auto-stop, transcription, automatic ENTER
-11. Claude responds!
+6. Click START 🎤
+7. Speak: "Hello Claude, explain photosynthesis"
+8. Stay silent 10 seconds
+9. → Auto-stop, transcription, automatic ENTER
+10. Claude responds!
 ```
 
-**No need to touch the widget again!** Just keep talking and waiting 10s between sentences.
+### Example 2: Google Search
 
-### Example 2: Switching Models
-
-```bash
-1. Open any webpage
-2. Widget shows: 🟢 Connected (medium)
-3. Click model dropdown: 🤖 [medium ▼]
-4. Select: "large-v3 (best)"
-5. Widget shows: 🟡 Restarting...
-6. Wait 10-15 seconds
-7. Widget shows: 🟢 Connected (large-v3)
-8. Done! Now using large-v3 for better quality
 ```
-
-**No terminal commands needed!** Everything from the UI.
-
-### Example 3: Google Search
-
-```bash
 1. Open google.com
-2. Click in search bar
-3. Click START 🎤 in widget
+2. Click in search bar ← IMPORTANT!
+3. Click START in widget
 4. Say: "Weather in Paris tomorrow"
 5. Wait 10s → Auto-stop
-6. Search automatically launched with ENTER!
+6. Search launched automatically!
 ```
 
-### Example 4: Email Writing
+### Example 3: Email (Gmail)
 
-```bash
+```
 1. Open Gmail → New message
-2. Click in message body
-3. Click START 🎤
+2. Click in message body ← IMPORTANT!
+3. Click START
 4. Dictate your email
 5. Auto-stop after 10s silence
-6. Text inserted (ENTER not pressed in emails - that's intentional)
+6. Text inserted (ENTER not pressed in emails)
 ```
 
 ---
 
 ## ⚙️ Configuration
 
-### Changing Default Model at Startup
+### Change Default Model
 
-Edit `start-whisper.sh` line 14:
+Edit `start-whisper.sh`:
 
 ```bash
 # Change from:
@@ -363,205 +268,151 @@ DEFAULT_MODEL="ggml-medium.bin"
 DEFAULT_MODEL="ggml-large-v3.bin"
 ```
 
-Or always start with `--model` option:
-
+Or start with option:
 ```bash
 ./start-whisper.sh --exec --model ggml-large-v3.bin
 ```
 
-### Adding More Whisper Models
+### Add More Models
 
 ```bash
-cd /mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp
+cd /path/to/whisper.cpp
 
-# Download a model
+# Download model
 bash ./models/download-ggml-model.sh large-v3
 
 # Verify
 ls -la models/ggml-*.bin
-
-# Restart extension to see new model in dropdown
-```
-
-### Optimizing Performance
-
-**More CPU threads** (faster transcription):
-
-Edit `start-whisper.sh` and add:
-
-```bash
-./build/bin/whisper-server \
-    -m "models/$MODEL" \
-    --port $PORT \
-    --host $HOST \
-    --convert \
-    --threads 8      # Add this line
-```
-
-**Enable GPU** (if available):
-
-```bash
-./build/bin/whisper-server \
-    -m "models/$MODEL" \
-    --port $PORT \
-    --host $HOST \
-    --convert \
-    --gpu            # Add this line
 ```
 
 ---
 
-## 🛠 Troubleshooting
+## 🛠 Troubleshooting v3.0.1
 
 ### ❌ Widget not appearing
 
-**Possible causes**:
-1. Extension not loaded
-2. Content script blocked
-3. JavaScript error
-
-**Solutions**:
-
-```bash
-# 1. Check extension is loaded
-brave://extensions/
-# Look for "Whisper Local STT - Brave - En"
-
-# 2. Reload extension
-# Click 🔄 "Reload" button under extension
-
-# 3. Reload webpage
-# Press F5
-
-# 4. Check browser console
-# Press F12 → Console tab
-# Look for "[Whisper Widget]" messages
+**Solutions:**
 ```
+1. Ctrl+Shift+R (hard reload)
+2. brave://extensions/ → Reload extension
+3. F5 on webpage
+4. F12 → Console → Look for "[Whisper Widget]" messages
+```
+
+### ❌ Text not inserting ✨ v3.0.1 Fix
+
+**This should be FIXED in v3.0.1!**
+
+**Make sure you:**
+```
+1. Click in text field FIRST
+2. THEN click START
+3. Widget tracks your click
+```
+
+**Check console (F12):**
+```
+You should see:
+[Whisper Widget] Focus tracked: INPUT
+or
+[Whisper Widget] Click tracked: TEXTAREA
+```
+
+**If you see:**
+```
+[Whisper Widget] No suitable field
+```
+
+**Then:** Click in field before recording!
+
+### ❌ Widget too large
+
+**Fixed in v3.0.1!**
+
+If still shows old size:
+```
+Ctrl+Shift+R (multiple times)
+
+Or:
+brave://extensions/ → Remove → Load unpacked
+```
+
+### ❌ Cannot drag widget
+
+**Known issue in v3.0.1** - Will be fixed in v3.0.2.
+
+Widget position is saved automatically per domain.
 
 ### ❌ Model selection doesn't work
 
-**Possible causes**:
-1. Native Host not installed
-2. Wrong extension ID in manifest
-3. Native Host path incorrect
+**Cause:** Native Host not installed
 
-**Solutions**:
-
+**Solution:**
 ```bash
-# 1. Check Native Host is installed
-ls -la ~/.config/BraveSoftware/Brave-Browser/NativeMessagingHosts/com.whisper.control.json
-
-# 2. If not installed, run:
 ./install.sh --install-native
-
-# 3. Verify extension ID in manifest
-cat ~/.config/BraveSoftware/Brave-Browser/NativeMessagingHosts/com.whisper.control.json
-# Check "allowed_origins" has correct extension ID
-
-# 4. Restart Brave completely
+# Restart Brave completely
 ```
 
-### ❌ "🔴 Disconnected" status
-
-**Cause**: Whisper server not running
-
-**Solution**:
-
+**Check logs:**
 ```bash
-# Start whisper server
+tail -f /tmp/whisper-control.log
+```
+
+### ❌ Server disconnected (🔴)
+
+**Solution:**
+```bash
+# Start server
 ./start-whisper.sh --exec
 
-# Or check if port is blocked
+# Or check if port blocked
 lsof -i :8080
 ```
 
-### ❌ Model switch stuck at "🟡 Restarting..."
+### ❌ Transcription wrong language
 
-**Possible causes**:
-1. Model file doesn't exist
-2. Whisper failed to start
-3. Port already in use
+**Solution:** Select your language in widget (don't use "Auto-detection")
 
-**Solutions**:
+### ❌ ENTER doesn't press
 
-```bash
-# 1. Check logs
-tail -f /tmp/whisper-control.log
-tail -f /tmp/whisper-server.log
+**Normal on some sites** (banking, secure forms) for security.
 
-# 2. Check model exists
-ls -la /path/to/whisper.cpp/models/ggml-*.bin
-
-# 3. Kill all whisper processes
-pkill -f whisper-server
-
-# 4. Manually restart with desired model
-./start-whisper.sh --exec --model ggml-medium.bin
-
-# 5. Reload widget (refresh page)
-```
-
-### ❌ Widget position resets
-
-**Cause**: localStorage cleared or different domain
-
-**Note**: Widget position is saved **per domain**. If you visit a different site, widget may appear at default position.
-
-**Solution**: Just drag it where you want - position will be saved for that domain.
-
-### ❌ Transcription in wrong language
-
-**Cause**: Language set to "Auto-detection" or wrong language
-
-**Solution**:
-1. Open widget
-2. Change language dropdown to your language (e.g., French)
-3. Language preference is saved automatically
-
-### ❌ ENTER doesn't press after insertion
-
-**Cause**: Some websites block simulated keyboard events for security
-
-**This is NORMAL and INTENDED** on:
-- Banking websites
-- Payment pages
-- Secure forms
-
-**Solution**: On these sites, text is inserted but you must press ENTER manually.
+On these sites, text inserts but you must press ENTER manually.
 
 ---
 
-## 🔄 Extension Update
+## 🔄 Extension Update v3.0.1
 
-If you modify the extension code:
+If updating from v3.0.0:
 
 ```bash
-# 1. Make your modifications
-vim content-widget.js
+cd /path/to/braveVTTextension
 
-# 2. Reload extension in Brave
-brave://extensions/
-# Click 🔄 "Reload" under the extension
+# Copy new files
+cp /path/to/content-widget.js ./
+cp /path/to/widget-style.css ./
 
-# 3. Reload webpage
-# Press F5
+# Reload extension
+brave://extensions/ → Reload
 
-# 4. Test modifications
+# Or remove + reload:
+brave://extensions/ → Remove → Load unpacked
+
+# Hard reload pages
+Ctrl+Shift+R
 ```
 
 ---
 
 ## 🚀 Automatic Startup (Optional)
 
-To launch whisper automatically at system startup:
-
-### Create systemd service
+Create systemd service:
 
 ```bash
 sudo nano /etc/systemd/system/whisper-stt.service
 ```
 
-File content:
+Content:
 ```ini
 [Unit]
 Description=Whisper.cpp Server for STT Extension
@@ -569,10 +420,10 @@ After=network.target
 
 [Service]
 Type=simple
-User=nox
-WorkingDirectory=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp
-Environment="LD_LIBRARY_PATH=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/src:/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/ggml/src"
-ExecStart=/mnt/data2_78g/Security/scripts/AI_Projects/DeepEcho_whisper/whisper.cpp/build/bin/whisper-server -m models/ggml-large-v3.bin --port 8080 --host 127.0.0.1 --convert
+User=YOUR_USER
+WorkingDirectory=/path/to/whisper.cpp
+Environment="LD_LIBRARY_PATH=/path/to/whisper.cpp/build/src:/path/to/whisper.cpp/build/ggml/src"
+ExecStart=/path/to/whisper.cpp/build/bin/whisper-server -m models/ggml-large-v3.bin --port 8080 --host 127.0.0.1 --convert
 Restart=on-failure
 RestartSec=5
 
@@ -580,81 +431,67 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
-Enable and start:
+Enable:
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable whisper-stt
 sudo systemctl start whisper-stt
-
-# Check status
 sudo systemctl status whisper-stt
-
-# View logs
-journalctl -u whisper-stt -f
 ```
 
 ---
 
 ## 🎉 Done!
 
-Your extension v3.0.0 is now installed and fully functional!
+### Quick Summary v3.0.1
 
-### Quick Summary
-
-```bash
-# 1. Load extension in Brave
-brave://extensions/ → Load unpacked
-
-# 2. Install Native Host (REQUIRED for model selection)
-./install.sh --install-native
-
-# 3. Restart Brave
-
-# 4. Start whisper server
-./start-whisper.sh --exec
-
-# 5. Open any webpage → Widget appears!
-
-# 6. Configure: language, delay, model
-
-# 7. Click START, speak, wait 10s, done!
+```
+1. Load extension in Brave
+2. (Optional) Install Native Host
+3. Start whisper server
+4. Open webpage → Widget appears
+5. Click in text field FIRST ← Important!
+6. Click START, speak, wait 10s
+7. Text inserts + ENTER → Done!
 ```
 
 ---
 
-## 📝 Important Notes v3.0.0
+## 📝 Important Notes v3.0.1
 
-### Floating Widget
-- ✅ Always visible on all pages
-- ✅ Never closes when clicking elsewhere
-- ✅ Draggable and minimizable
-- ✅ Position saved per domain
+### Text Insertion ✅ FIXED
+- Widget now tracks focus and clicks
+- Always click in field BEFORE recording
+- Check console for "Focus tracked" messages
 
-### Model Selection
-- ✅ Requires Native Messaging Host
-- ✅ Install with `./install.sh --install-native`
-- ✅ Restart Brave after installation
-- ✅ Switch models directly from widget
+### Widget Size ✅ REDUCED
+- 280px width (was 350px)
+- 50x50px minimized (was 70x70px)
+- More compact!
 
-### Privacy
-- 🔒 **100% local** - No data sent to internet
-- 🎤 **No storage** - Audio processed and immediately deleted
-- 🌍 **Zero cloud** - Everything stays on your machine
-- 🔐 **Open source** - Fully auditable code
+### Known Issues ⚠️
+- Drag functionality not working
+- Will be fixed in v3.0.2
+
+### Privacy 🔒
+- 100% local processing
+- No data sent to internet
+- Zero tracking
+- Open source
 
 ---
 
 ## 🆘 Support
 
 **Problems?**
-1. Check whisper server logs: `tail -f /tmp/whisper-server.log`
+1. Check server logs: `tail -f /tmp/whisper-server.log`
 2. Check Native Host logs: `tail -f /tmp/whisper-control.log`
 3. Check browser console: F12 → Console
 4. Check README.md for more info
 
 ---
 
-**Enjoy your voice interface v3.0.0! 🎤✨**
+**Enjoy your voice interface v3.0.1! 🎤✨**
 
 **Author**: Bruno DELNOZ - bruno.delnoz@protonmail.com  
-**Version**: 3.0.0 - 2025-11-01
+**Version**: 3.0.1 - 2025-11-02
