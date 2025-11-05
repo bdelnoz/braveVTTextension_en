@@ -3,23 +3,23 @@
   "name": "Whisper Local STT - Brave - En",
   "version": "3.0.0",
   "description": "100% local voice transcription with whisper.cpp - Floating widget with model selection - No data sent online",
-  
+
   "permissions": [
     "activeTab",
     "scripting",
     "storage",
     "nativeMessaging"
   ],
-  
+
   "host_permissions": [
     "http://localhost:8080/*",
     "http://127.0.0.1:8080/*"
   ],
-  
+
   "background": {
     "service_worker": "background.js"
   },
-  
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -28,7 +28,7 @@
       "run_at": "document_end"
     }
   ],
-  
+
   "icons": {
     "48": "icon48.png",
     "96": "icon96.png"
